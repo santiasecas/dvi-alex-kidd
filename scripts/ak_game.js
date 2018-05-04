@@ -12,14 +12,15 @@ window.addEventListener("load", function() {
 	.setup({
 		width: 512,
 		height: 384
+		//maximize: true
 	})
 	.controls()
 	.touch()
 	.enableSound()
 	
 	//CARGA DE RECURSOS
-	Q.load(["main-theme.ogg"], function(){
-		//Q.compileSheets();
+	Q.load(["main_theme.ogg","jump.ogg", "alex.png", "alex.json", "coin.ogg", "punch.ogg"], function(){
+		Q.compileSheets("alex.png", "alex.json");
 	});
 	
 	
