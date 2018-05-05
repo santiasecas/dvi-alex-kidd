@@ -14,7 +14,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 			this._super(p, {
 				sheet: 'alex',
 				sprite: 'AlexAnimation',
-				jumpSpeed: -525,
+				jumpSpeed: -450,
 				speed: 200,
 				punching: 0
 			});
@@ -42,6 +42,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 				if(Q.inputs['up'] && !this.p.jumping) {
 					Q.audio.play("jump.ogg");
 				}
+				else if(Q.inputs['down']) this.play("crouch_" + this.p.direction);
 				else if(this.p.jumping && this.p.landed < 0){
 					this.play("jump_" + this.p.direction);
 				}
@@ -57,13 +58,15 @@ Quintus.AKSpritesPlayer = function(Q) {
 	}); 
 
 	Q.animations("AlexAnimation", {
-		run_right: { frames: [0, 1, 2, 3], flip: false, rate: 1/8 },
-		run_left: { frames: [0, 1, 2, 3], flip: 'x', rate: 1/8 },
+		run_right: { frames: [0, 1, 2, 3], flip: false, rate: 1/4},
+		run_left: { frames: [0, 1, 2, 3], flip: 'x', rate: 1/4},
 		stand_right: { frames: [8], flip: false, loop: false },
 		stand_left: { frames: [8], flip: 'x', loop: false },
 		jump_right: { frames: [9], flip: false, loop: false },
 		jump_left: { frames: [9], flip: 'x', loop: false },
 		punch: { frames: [15], loop: false, rate: 1/6, trigger: "noPunch"},
+		crouch_right: { frames: [10], flip: false, loop: false},
+		crouch_left: { frames: [10], flip: 'x', loop: false},
 		fist: { frames: [16], loop: false, rate: 1/6, trigger: "destroy"}
 	});
 	
