@@ -23,6 +23,8 @@ window.addEventListener("load", function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
         Q.sheet("bird", "bird.png", { tilew: 48, tileh: 32 });
         Q.sheet("scorpion", "scorpion.png", { tilew: 32, tileh: 28 });
+        Q.sheet("frog", "frog.png", { tilew: 32, tileh: 48 });
+
     });
 
 

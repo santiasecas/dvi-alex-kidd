@@ -77,11 +77,11 @@ Quintus.AKSpritesEnemies = function(Q) {
                 sprite: 'FrogAnimation',
                 gravity: 1,
                 contStand: 0,
-                maxStand: 2,
+                maxStand: 2.5,
+                frame: 0,
                 vx: 0,
                 vy: 0,
                 mirandoDerecha: true
-
             });
             this.add("2d, animation, aiBounce");
             this.play("stand_right"); // Mirando hacia la derecha
@@ -94,32 +94,38 @@ Quintus.AKSpritesEnemies = function(Q) {
 
             //Cuando colisiona por su lado izquierdo debe cambiar de dirección
             this.on("bump.left", function(collision) {
-                this.play("stand_right");
-                this.p.mirandoDerecha = true;
+                if (!collision.obj.isA("Alex")) {
+                    this.play("stand_right");
+                    this.p.mirandoDerecha = true;
+                }
             });
 
             //Cuando colisiona por su lado derecho debe cambiar de dirección
             this.on("bump.right", function(collision) {
-                this.play("stand_left");
-                this.p.mirandoDerecha = false;
+                if (!collision.obj.isA("Alex")) {
+                    this.play("stand_left");
+                    this.p.mirandoDerecha = false;
+                }
+
             });
+
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("Alex")) console.log("Toco a Alex");
                 else if (collision.obj.isA("AlexFist")) this.destroy();
             });
         },
-        step: function(dt) {
-            this.p.contStand += this.p.contStand + dt;
 
+        step: function(dt) {
+            this.p.contStand += dt;
             //Comprobamos si la rana debe de saltar
             if (this.p.contStand > this.p.maxStand) {
-                //Comprobamo hacia donde mira la rana
+                //Comprobamos hacia donde mira la rana
                 if (this.p.mirandoDerecha) {
-                    this.p.vx = 50;
+                    this.p.vx = 100;
                 } else {
-                    this.p.vx = -50;
+                    this.p.vx = -100;
                 }
-                this.p.vy = -100;
+                this.p.vy = -250;
                 this.p.contStand = 0;
             }
 
@@ -129,6 +135,12 @@ Quintus.AKSpritesEnemies = function(Q) {
                     this.play("jump_right");
                 } else {
                     this.play("jump_left");
+                }
+            } else {
+                if (this.p.mirandoDerecha) {
+                    this.play("stand_right");
+                } else {
+                    this.play("stand_left");
                 }
             }
         }

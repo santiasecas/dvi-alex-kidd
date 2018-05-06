@@ -14,7 +14,7 @@ Quintus.AKScenes = function(Q) {
         //stage.insert(new Q.Bird({ x: 200, y: 200 }));
         stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
 
-        stage.insert(new Q.Frog({ x: 200, y: 200 }));
+        stage.insert(new Q.Frog({ x: 110, y: 200 }));
 
 
         stage.add("viewport").follow(alex, { x: false, y: true });
