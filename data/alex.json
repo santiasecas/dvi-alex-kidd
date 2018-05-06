@@ -1,0 +1,6 @@
+{
+    "alex": { "sx": 0, "sy": 0, "tileW": 32, "tileH": 48, "frames": 4 },
+    "alexDie": { "sx": 352, "sy": 0, "tileW": 32, "tileH": 48, "frames": 3 },
+    "alexJump": { "sx": 288, "sy": 0, "tileW": 32, "tileH": 48, "frames": 1 },
+    "fist": { "sx": 511, "sy": 16, "tileW": 16, "tileH": 16, "frames": 1 }
+}
