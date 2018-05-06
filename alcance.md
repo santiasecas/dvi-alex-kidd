@@ -9,7 +9,7 @@ Nos encontramos ante un juego icónico de los años ‘80. Uno de los miembros d
 
 Es el primero de una saga de 6 juegos de Alex Kidd, siendo este el más icónico de todos ellos por ser uno de los primeros precursores de los juegos de plataformas en 2 dimensiones y por su originalidad. El juego consiste en controlar a Alex Kidd, un niño-mono que, ayudándose de su poderoso puño, tendrá que superar 17 niveles acabando con los enemigos característicos de cada uno de ellos y recolectando recursos tales como bolsas de dinero o anillos; con el fin de liberar el planeta Aries de las manos del gobernante tirano Janken el grande.
 
-### Datos sobre el juego:
+### Datos sobre el juego
 
 | Categoría | Información |
 |-----|-----|
