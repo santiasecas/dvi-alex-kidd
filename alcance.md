@@ -1,6 +1,6 @@
 # Alex Kidd in Miracle World
 
-### INTRO
+### Introducción
 Nos encontramos ante un juego icónico de los años ‘80. Uno de los miembros del equipo recuerda haber pasado horas frente a la Mega Drive jugándolo. Tuvo un gran impacto llegando a ser uno de los juegos más jugados.
 
 <p align="center">
