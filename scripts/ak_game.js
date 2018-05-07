@@ -25,13 +25,12 @@ window.addEventListener("load", function() {
         Q.sheet("scorpion", "scorpion.png", { tilew: 32, tileh: 28 });
         Q.sheet("frog", "frog.png", { tilew: 32, tileh: 48 });
         Q.sheet("escenary", "tiles.png", { tilew: 32, tileh: 32 });
-
+        //CARGA INICIAL DEL JUEGO
+        Q.loadTMX("level1.tmx", function() {
+            //Q.audio.play('main_theme.ogg',{loop: true});
+            Q.stageScene("level1");
+        });
     });
 
 
-    //CARGA INICIAL DEL JUEGO
-    Q.loadTMX("level1.tmx", function() {
-        //Q.audio.play('main_theme.ogg',{loop: true});
-        Q.stageScene("level1");
-    });
 });
