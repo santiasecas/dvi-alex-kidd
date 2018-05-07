@@ -75,16 +75,16 @@ Quintus.AKSpritesEnemies = function(Q) {
             this._super(p, {
                 sheet: 'frog',
                 sprite: 'FrogAnimation',
-                gravity: 1,
+                gravity: .5,
                 contStand: 0,
                 maxStand: 2.5,
                 frame: 0,
                 vx: 0,
                 vy: 0,
-                mirandoDerecha: true
+                mirandoDerecha: false
             });
             this.add("2d, animation, aiBounce");
-            this.play("stand_right"); // Mirando hacia la derecha
+            this.play("stand_left"); // Mirando hacia la derecha
 
             //Si la rana toca el suelo esta se debe de quedar quieta
             this.on("bump.bottom", function(collision) {
@@ -121,11 +121,11 @@ Quintus.AKSpritesEnemies = function(Q) {
             if (this.p.contStand > this.p.maxStand) {
                 //Comprobamos hacia donde mira la rana
                 if (this.p.mirandoDerecha) {
-                    this.p.vx = 100;
+                    //this.p.vx = 100;
                 } else {
-                    this.p.vx = -100;
+                    //this.p.vx = -100;
                 }
-                this.p.vy = -250;
+                this.p.vy = -350;
                 this.p.contStand = 0;
             }
 

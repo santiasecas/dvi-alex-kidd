@@ -19,11 +19,12 @@ window.addEventListener("load", function() {
         .enableSound()
 
     //CARGA DE RECURSOS
-    Q.load(["main_theme.ogg", "main_theme.mp3", "jump.ogg", "jump.mp3", "alex.png", "bird.png", "frog.png", "frog.json", "scorpion.png", "coin.ogg", "coin.mp3", "punch.ogg"], function() {
+    Q.load(["main_theme.ogg", "main_theme.mp3", "jump.ogg", "jump.mp3", "alex.png", "bird.png", "frog.png", "frog.json", "scorpion.png", "tiles.png", "coin.ogg", "coin.mp3", "punch.ogg"], function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
         Q.sheet("bird", "bird.png", { tilew: 48, tileh: 32 });
         Q.sheet("scorpion", "scorpion.png", { tilew: 32, tileh: 28 });
         Q.sheet("frog", "frog.png", { tilew: 32, tileh: 48 });
+        Q.sheet("escenary", "tiles.png", { tilew: 32, tileh: 32 });
 
     });
 
