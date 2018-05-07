@@ -15,12 +15,12 @@ Quintus.AKScenes = function(Q) {
         //Q.audio.play('main_theme.ogg',{loop: true});
         Q.stageTMX('level1.tmx', stage);
         var alex = stage.insert(new Q.Alex({ x: 100, y: 200 }));
-        //stage.insert(new Q.Bird({ x: 200, y: 200 }));
-        //stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
-        //stage.insert(new Q.Frog({ x: 110, y: 200 }));
-        //stage.insert(new Q.Question({ x: 200, y: 200 }));
-        //stage.insert(new Q.StarBlock({ x: 232, y: 200 }));
-        //stage.insert(new Q.Rock({ x: 264, y: 200 }));
+        stage.insert(new Q.Bird({ x: 200, y: 200 }));
+        stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
+        stage.insert(new Q.Frog({ x: 110, y: 200 }));
+        stage.insert(new Q.Question({ x: 200, y: 200, drop: 'sackBig' }));
+        stage.insert(new Q.StarBlock({ x: 232, y: 200, drop: 'sackLittle' }));
+		stage.insert(new Q.Rock({ x: 264, y: 200, drop: 'sackBig' }));
 
 
         //PRIMER NIVEL DE OBJETOS

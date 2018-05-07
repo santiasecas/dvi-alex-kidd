@@ -12,12 +12,15 @@ Quintus.AKSpritesObjects = function(Q) {
             this._super(p, {
                 sheet: 'escenary',
 				frame: 9,
-                gravity: 0
+                gravity: 0,
             });
-            this.add("2d");
+            this.add("2d, drops");
 
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("AlexFist")) {
+                    this.destroy();
+                    this.drop();
+                }
             });
 
         }
@@ -28,14 +31,16 @@ Quintus.AKSpritesObjects = function(Q) {
             this._super(p, {
                 sheet: 'escenary',
 				frame: 8,
-                gravity: 0
+                gravity: 0,
             });
-            this.add("2d");
+            this.add("2d, drops");
 
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("AlexFist")) {
+                    this.destroy();
+                    this.drop();
+                }
             });
-
         }
     });
 
@@ -44,12 +49,60 @@ Quintus.AKSpritesObjects = function(Q) {
             this._super(p, {
                 sheet: 'escenary',
 				frame: 7,
+                gravity: 0,
+            });
+            this.add("2d, drops");
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist")) {
+                    this.destroy();
+                    this.drop();
+                }
+            });
+        }
+    });
+
+    Q.Sprite.extend("SackLittle", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+                frame: 12,
+                sensor: true,
                 gravity: 0
             });
             this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("Alex")) {
+                    Q.audio.play("coin.ogg");
+                    this.destroy();
+                };
             });
         }
     });
+
+    Q.Sprite.extend("SackBig", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+                frame: 11,
+                sensor: true,
+                gravity: 0
+            });
+            this.add("2d");
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("Alex")) {
+                    Q.audio.play("coin.ogg");
+                    this.destroy();
+                };
+            });
+        }
+    });
+    
+    Q.component("drops", {
+        extend: {
+            drop: function() {
+                if(this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
+                if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
+            },
+        }
+    })
 }
