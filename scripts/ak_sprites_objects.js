@@ -105,4 +105,22 @@ Quintus.AKSpritesObjects = function(Q) {
             },
         }
     })
+	
+	Q.Sprite.extend("Arrow",{
+		init: function(p){
+			this._super(p, {
+				sheet: "arrow",
+				sprite: "ArrowAnimation",
+				x: 162,
+				y: 212,
+				gravity: 0
+			});
+			this.add("animation, tween");
+			this.play("point");
+		}
+	});
+	
+	Q.animations("ArrowAnimation", {
+		point: { frames: [0,1], rate: 1/2}
+	});
 }

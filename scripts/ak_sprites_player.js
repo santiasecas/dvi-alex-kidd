@@ -66,8 +66,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 		jump_left: { frames: [9], flip: 'x', loop: false },
 		punch: { frames: [15], loop: false, rate: 1, trigger: "noPunch"},
 		crouch_right: { frames: [10], flip: false, loop: false},
-		crouch_left: { frames: [10], flip: 'x', loop: false},
-		fist: { frames: [16], loop: false, rate: 1, trigger: "destroy"}
+		crouch_left: { frames: [10], flip: 'x', loop: false}
 	});
 	
 	//SPRITE DEL PUÑO DE ALEX
@@ -96,5 +95,30 @@ Quintus.AKSpritesPlayer = function(Q) {
 				}
 			}
 		}
+	});
+	
+	//SPRITE DE ALEX EN EL MENU DEL MAPA
+	Q.Sprite.extend("AlexMap",{
+		init: function(p){
+			this._super(p, {
+				sheet: "alexmap",
+				sprite: "AlexMapAnimation",
+				x: 450,
+				y: 300,
+				gravity: 0
+			});
+			this.add("animation, tween");
+			this.play("eating");
+		},
+		step: function(dt) {
+			if(Q.inputs['action']) {
+				Q.clearStages();
+				Q.stageScene("level1");
+			}
+		}
+	});
+	
+	Q.animations("AlexMapAnimation", {
+		eating: { frames: [0,1], rate: 1/2}
 	});
 }

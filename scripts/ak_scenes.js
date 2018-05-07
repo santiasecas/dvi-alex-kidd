@@ -18,9 +18,9 @@ Quintus.AKScenes = function(Q) {
         stage.insert(new Q.Bird({ x: 200, y: 200 }));
         stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
         stage.insert(new Q.Frog({ x: 110, y: 200 }));
-        stage.insert(new Q.Question({ x: 200, y: 200, drop: 'sackBig' }));
-        stage.insert(new Q.StarBlock({ x: 232, y: 200, drop: 'sackLittle' }));
-		stage.insert(new Q.Rock({ x: 264, y: 200, drop: 'sackBig' }));
+        stage.insert(new Q.Question({ x: 200, y: 200, drop: 'sackBig'}));
+        stage.insert(new Q.StarBlock({ x: 232, y: 200, drop: 'sackLittle'}));
+        stage.insert(new Q.Rock({ x: 264, y: 200,  drop: 'sackBig'}));
 
 
         //PRIMER NIVEL DE OBJETOS
@@ -43,8 +43,77 @@ Quintus.AKScenes = function(Q) {
 			stage.insert(new Q.Rock(blocksToMap(rocks[r])));
 		}
 
-
         stage.add("viewport").follow(alex, { x: false, y: true });
         stage.centerOn(256, 0);
     });
+	
+	var count = 0;
+	var menus = ["menu01.png", "menu02.png", "menu03.png" ,"menu04.png",
+				 "menu05.png", "menu06.png", "menu07.png", "menu08.png"];
+
+	Q.Sprite.extend("Menu",{
+		init: function(p){
+			this._super(p, {
+				asset: menus[count],
+				x: 256,
+				y: 192,
+				scale: 0.64,
+				action: false
+			});
+			this.add("tween");
+		}, 
+		step: function(dt) {
+			if(this.p.action == true && Q.inputs['fire']) {
+				Q.clearStages();
+				Q.stageScene("map");
+			}
+		}
+	});
+	
+	Q.scene("menu", function(stage) {
+		var sprite = stage.insert(new Q.Menu);
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count]}));
+		}});
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count]}));
+		}});
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count]}));
+		}});
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count]}));
+		}});
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count]}));
+		}});
+		sprite.chain({x: 256, y: 192}, 0.5, { callback: function() {
+			stage.insert(new Q.Menu({asset: menus[++count], action:true}));
+		}});
+	});
+	
+	Q.Sprite.extend("Map",{
+		init: function(p){
+			this._super(p, {
+				asset: "map.png",
+				x: 256,
+				y: 192,
+				scale: 0.64,
+				action: false
+			});
+			this.add("tween");
+		}, 
+		step: function(dt) {
+			if(Q.inputs['action']) {
+				Q.clearStages();
+				Q.stageScene("level1");
+			}
+		}
+	});
+	
+	Q.scene("map", function(stage) {
+		stage.insert(new Q.Map);
+		stage.insert(new Q.AlexMap);
+		stage.insert(new Q.Arrow);
+	});
 }
