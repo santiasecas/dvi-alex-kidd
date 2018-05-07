@@ -74,15 +74,12 @@ Quintus.AKSpritesPlayer = function(Q) {
 	Q.Sprite.extend("AlexFist",{
 		init: function(p){
 			this._super(p, {
-				sheet: 'alex',
-				sprite: 'AlexAnimation',
+				asset: 'fist.png',
 				gravity: 0,
 				sensor: true,
-				//type: Q.SPRITE_NONE,
 				collisionMask:''
 			});
 			this.add('2d, animation');
-			this.play('fist');
 			this.on('destroy', function(){ 
 				this.destroy();
 			});
@@ -92,10 +89,10 @@ Quintus.AKSpritesPlayer = function(Q) {
 				alex = Q.stage().lists.Alex[0];
 				this.p.y = alex.p.y;
 				if(alex.p.direction == 'right') {
-					this.p.x = alex.p.x + 32;
+					this.p.x = alex.p.x + 24;
 				}
 				else if(alex.p.direction == 'left') {
-					this.p.x = alex.p.x - 16;
+					this.p.x = alex.p.x - 24;
 				}
 			}
 		}

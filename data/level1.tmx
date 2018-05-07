@@ -11,7 +11,7 @@
    <property name="collision" value="true"/>
   </properties>
   <data>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -27,7 +27,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -43,7 +43,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -59,7 +59,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -75,7 +75,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -91,7 +91,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
@@ -107,7 +107,7 @@
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="16"/>
-   <tile gid="14"/>
+   <tile gid="15"/>
    <tile gid="1"/>
    <tile gid="1"/>
    <tile gid="1"/>
