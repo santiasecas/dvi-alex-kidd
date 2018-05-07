@@ -11,16 +11,13 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-                gravity: 0,
-                gravity: 0,
-                frame: 9
-
+				frame: 9,
+                gravity: 0
             });
-            this.add("2d, animation, aiBounce");
+            this.add("2d");
 
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) console.log("Toco a Alex");
-                else if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("AlexFist")) this.destroy();
             });
 
         }
@@ -30,16 +27,13 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-                gravity: 0,
-                gravity: 0,
-                frame: 8
-
+				frame: 8,
+                gravity: 0
             });
-            this.add("2d, animation, aiBounce");
+            this.add("2d");
 
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) console.log("Toco a Alex");
-                else if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("AlexFist")) this.destroy();
             });
 
         }
@@ -49,18 +43,13 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-                gravity: 0,
-                gravity: 0,
-                frame: 7
-
+				frame: 7,
+                gravity: 0
             });
-            this.add("2d, animation, aiBounce");
-
+            this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) console.log("Toco a Alex");
-                else if (collision.obj.isA("AlexFist")) this.destroy();
+                if (collision.obj.isA("AlexFist")) this.destroy();
             });
-
         }
     });
 }

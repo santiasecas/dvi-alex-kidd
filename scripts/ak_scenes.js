@@ -7,51 +7,41 @@
  */
 
 Quintus.AKScenes = function(Q) {
+	function blocksToMap([a, b]) {
+		return {x: + a * 32 + 16, y: b * 32 + 16};
+	}
+	
     Q.scene("level1", function(stage) {
         //Q.audio.play('main_theme.ogg',{loop: true});
         Q.stageTMX('level1.tmx', stage);
         var alex = stage.insert(new Q.Alex({ x: 100, y: 200 }));
         //stage.insert(new Q.Bird({ x: 200, y: 200 }));
-        stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
-
+        //stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
         //stage.insert(new Q.Frog({ x: 110, y: 200 }));
-
         //stage.insert(new Q.Question({ x: 200, y: 200 }));
         //stage.insert(new Q.StarBlock({ x: 232, y: 200 }));
         //stage.insert(new Q.Rock({ x: 264, y: 200 }));
 
 
         //PRIMER NIVEL DE OBJETOS
-        let star1 = stage.insert(new Q.StarBlock({ x: 432, y: 224 }));
-        let star2 = stage.insert(new Q.StarBlock({ x: 96, y: 336 }));
-        let star3 = stage.insert(new Q.StarBlock({ x: 96, y: 368 }));
-        let star4 = stage.insert(new Q.StarBlock({ x: 448, y: 448 }));
+		var stars = [[3,10],[3,11],[14,21],[14,22],[1,23],[3,28],[3,32],[2,34],[6,34],[6,35],
+					 [7,34],[14,36],[1,40],[1,42],[14,51],[14,52],[3,54],[1,61],[12,64],[13,64],
+					 [14,64],[9,70],[1,72],[12,76],[14,79],[10,88],[10,90]];
+					 
+		for(s in stars) {
+			stage.insert(new Q.StarBlock(blocksToMap(stars[s])));
+		}
 
-        let rock1 = stage.insert(new Q.Rock({ x: 96, y: 400 }));
-        let rock2 = stage.insert(new Q.Rock({ x: 432, y: 432 }));
-        let rock3 = stage.insert(new Q.Rock({ x: 272, y: 496 }));
-        let rock4 = stage.insert(new Q.Rock({ x: 272, y: 528 }));
-
-
-        //SEGUNDO NIVEL DE OBJETOS
-        let star5 = stage.insert(new Q.StarBlock({ x: 466, y: 688 }));
-        let star6 = stage.insert(new Q.StarBlock({ x: 466, y: 720 }));
-        let star7 = stage.insert(new Q.StarBlock({ x: 48, y: 752 }));
-        let star8 = stage.insert(new Q.StarBlock({ x: 368, y: 848 }));
-
-        let rock5 = stage.insert(new Q.Rock({ x: 240, y: 720 }));
-        let rock6 = stage.insert(new Q.Rock({ x: 240, y: 752 }));
-        let rock7 = stage.insert(new Q.Rock({ x: 400, y: 752 }));
-        let rock8 = stage.insert(new Q.Rock({ x: 48, y: 784 }));
-        let rock9 = stage.insert(new Q.Rock({ x: 80, y: 784 }));
-        let rock10 = stage.insert(new Q.Rock({ x: 432, y: 784 }));
-        let rock11 = stage.insert(new Q.Rock({ x: 466, y: 816 }));
-
-
-        //TERCER NIVEL DE OBJETOS
-
-
-
+		
+		var rocks = [[3,12],[8,15],[8,16],[1,24],[2,24],[7,22],[7,23],[12,23],[13,24],[14,25],
+					 [4,28],[3,29],[4,30],[2,31],[4,31],[2,32],[5,32],[6,32],[2,33],[6,33],
+					 [2,35],[13,37],[14,37],[1,39],[2,39],[3,39],[4,39],[4,40],[4,41],[4,42],
+					 [14,43],[13,44],[12,45],[1,54],[2,54],[4,55],[4,56],[2,61],[14,61],[1,62],
+					 [2,62],[13,62],[12,65],[12,66],[14,66],[4,88],[4,89],[4,90],[4,91],[10,89],
+					 [10,91],[12,88],[12,89],[12,90],[12,91]];
+		for(r in rocks) {
+			stage.insert(new Q.Rock(blocksToMap(rocks[r])));
+		}
 
 
         stage.add("viewport").follow(alex, { x: false, y: true });
