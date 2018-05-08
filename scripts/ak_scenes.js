@@ -179,9 +179,9 @@ Quintus.AKScenes = function(Q) {
         sprite.chain({ x: 256, y: 192 }, 0.5, {
             callback: function() {
                 stage.insert(new Q.Menu({ asset: menus[++count], action: true }));
+				stage.insert(new Q.Logo);
             }
         });
-		
     });
 
     Q.Sprite.extend("Map", {

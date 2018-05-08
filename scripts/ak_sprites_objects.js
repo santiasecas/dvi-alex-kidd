@@ -123,4 +123,23 @@ Quintus.AKSpritesObjects = function(Q) {
 	Q.animations("ArrowAnimation", {
 		point: { frames: [0,1], rate: 1/2}
 	});
+	
+	Q.Sprite.extend("Logo",{
+		init: function(p){
+			this._super(p, {
+				sheet: "logo",
+				sprite: "LogoAnimation",
+				x: 256,
+                y: 192,
+                scale: 0.64,
+				gravity: 0
+			});
+			this.add("animation");
+			this.play("point");
+		}
+	});
+	
+	Q.animations("LogoAnimation", {
+		point: { frames: [0,1], rate: 1/8}
+	});
 }

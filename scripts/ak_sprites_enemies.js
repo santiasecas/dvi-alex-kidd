@@ -219,26 +219,21 @@ Quintus.AKSpritesEnemies = function(Q) {
 						if(this.p.x ==  PlayerX) {
 							this.play("stand_left"); 
 						}
-                        if(this.p.x > PlayerX) {
+                        if(this.p.x > (PlayerX + 2)) {
 						   this.p.x = this.p.x - 1.5;
 						   this.play("stand_left");
 					    }
-						else if(this.p.x < PlayerX) {
+						else if(this.p.x < (PlayerX - 2)) {
 						   this.p.x = this.p.x + 1.5;
 						   this.play("stand_right");
 						}
-						else {
-						   this.p.x += 0;
-						   this.play("stand_right");
-						}
 
-						if(this.p.y >= PlayerY) {
+						if(this.p.y > (PlayerY + 2)) {
 						   this.p.y = this.p.y - 1.5;
 						}
-						else if(this.p.y < PlayerY) {
+						else if(this.p.y < (PlayerY- 2)) {
 						   this.p.y = this.p.y + 1.5;
 						}
-						else this.p.y = this.p.y;
                     }
                 }
             }
