@@ -181,6 +181,7 @@ Quintus.AKScenes = function(Q) {
                 stage.insert(new Q.Menu({ asset: menus[++count], action: true }));
             }
         });
+		
     });
 
     Q.Sprite.extend("Map", {

@@ -182,7 +182,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 gravity: 0,
                 dormido: true,
                 esperando: true,
-                MaxVivo: 3,
+                MaxVivo: 8,
                 contVivo: 0,
                 esperaMax: 2,
                 contEspera: 0
@@ -206,19 +206,44 @@ Quintus.AKSpritesEnemies = function(Q) {
                     this.p.contEspera += dt;
                     if (this.p.contEspera > this.p.esperaMax) {
                         this.p.esperando = false;
+						this.p.collisionMask = '';
+						this.p.sensor = true;
                     }
                 } else {
                     this.p.contVivo += dt;
                     if (this.p.contVivo > this.p.MaxVivo) {
                         this.destroy();
                     } else {
-                        this.p.vx = -40;
+						PlayerX = Q.stages[0].lists["Alex"][0].p.x;
+						PlayerY = Q.stages[0].lists["Alex"][0].p.y;
+						if(this.p.x ==  PlayerX) {
+							this.play("stand_left"); 
+						}
+                        if(this.p.x > PlayerX) {
+						   this.p.x = this.p.x - 1.5;
+						   this.play("stand_left");
+					    }
+						else if(this.p.x < PlayerX) {
+						   this.p.x = this.p.x + 1.5;
+						   this.play("stand_right");
+						}
+						else {
+						   this.p.x += 0;
+						   this.play("stand_right");
+						}
+
+						if(this.p.y >= PlayerY) {
+						   this.p.y = this.p.y - 1.5;
+						}
+						else if(this.p.y < PlayerY) {
+						   this.p.y = this.p.y + 1.5;
+						}
+						else this.p.y = this.p.y;
                     }
                 }
             }
         }
     });
-
 
     Q.animations("GhostAnimation", {
         stand_right: { frames: [0, 1], flip: 'x', rate: 1, loop: true },
