@@ -150,6 +150,8 @@ Quintus.AKScenes = function(Q) {
     });
 
     Q.scene("menu", function(stage) {
+		Q.audio.stop();
+		Q.audio.play("menu.ogg");
         var sprite = stage.insert(new Q.Menu);
         sprite.chain({ x: 256, y: 192 }, 0.5, {
             callback: function() {
@@ -205,12 +207,16 @@ Quintus.AKScenes = function(Q) {
     });
 
     Q.scene("map", function(stage) {
+		Q.audio.stop();
+		Q.audio.play("map.ogg");
         stage.insert(new Q.Map);
         stage.insert(new Q.AlexMap);
         stage.insert(new Q.Arrow);
     });
 	
 	Q.scene("creditos",function(stage) {
+		Q.audio.stop();
+		Q.audio.play("credits.ogg");
 		stage.insert(new Q.Sprite({ asset: "creditos.png", x: 256, y: 192, scale: 0.64 }));
 		var sprite = new Q.Sprite({ asset: "creditos_dani.png", x: 256, y: 192, scale: 0.64 });
 		sprite.add("tween");

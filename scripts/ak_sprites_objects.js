@@ -73,7 +73,7 @@ Quintus.AKSpritesObjects = function(Q) {
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("Alex")) {
                     Q.audio.play("coin.ogg");
-                    this.destroy();
+					this.destroy();
                 };
             });
         }
@@ -89,9 +89,9 @@ Quintus.AKSpritesObjects = function(Q) {
             });
             this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) {
+                if (collision.obj.isA("Alex")){
+					this.destroy();
                     Q.audio.play("coin.ogg");
-                    this.destroy();
                 };
             });
         }

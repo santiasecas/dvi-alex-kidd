@@ -25,7 +25,8 @@ window.addEventListener("load", function() {
         "menu01.png", "menu02.png", "menu03.png", "menu04.png", "menu05.png",
         "menu06.png", "menu07.png", "map.png", "alexmap.png", "ghost.png",
 		"arrow.png", "logo.png", "creditos.png","creditos_dani.png",
-		"creditos_edu.png", "creditos_jorge.png", "creditos_santi.png"
+		"creditos_edu.png", "creditos_jorge.png", "creditos_santi.png",
+		"menu.mp3","menu.ogg","map.ogg","map.mp3", "credits.mp3", "credits.ogg"
 		], function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
         Q.sheet("bird", "bird.png", { tilew: 48, tileh: 32 });
