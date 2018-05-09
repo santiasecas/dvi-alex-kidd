@@ -120,14 +120,14 @@ Quintus.AKScenes = function(Q) {
         for (r in rocks) {
             stage.insert(new Q.Rock(blocksToMap(rocks[r])));
         }
-
+		stage.insert(new Q.Rice(blocksToMap([13,107])));
         stage.add("viewport").follow(alex, { x: false, y: true });
         stage.centerOn(256, 0);
     });
 
     var count = 0;
-    var menus = ["menu01.png", "menu02.png", "menu03.png", "menu04.png",
-        "menu05.png", "menu06.png", "menu07.png", "menu08.png"
+    var menus = ["menu01.png", "menu02.png", "menu03.png", "menu06.png", 
+				 "menu05.png", "menu04.png", "menu07.png"
     ];
 
     Q.Sprite.extend("Menu", {
@@ -180,6 +180,7 @@ Quintus.AKScenes = function(Q) {
             callback: function() {
                 stage.insert(new Q.Menu({ asset: menus[++count], action: true }));
 				stage.insert(new Q.Logo);
+				count = 0;
             }
         });
     });
@@ -208,4 +209,30 @@ Quintus.AKScenes = function(Q) {
         stage.insert(new Q.AlexMap);
         stage.insert(new Q.Arrow);
     });
+	
+	Q.scene("creditos",function(stage) {
+		stage.insert(new Q.Sprite({ asset: "creditos.png", x: 256, y: 192, scale: 0.64 }));
+		var sprite = new Q.Sprite({ asset: "creditos_dani.png", x: 256, y: 192, scale: 0.64 });
+		sprite.add("tween");
+		stage.insert(sprite);
+		sprite.chain({opacity: 0 }, 5, Q.Easing.Quadratic.In, { callback: function() { 
+			var sprite2 = new Q.Sprite({ asset: "creditos_edu.png", x: 256, y: 192, scale: 0.64 });
+			stage.insert(sprite2);
+			sprite2.add("tween");
+			sprite2.chain({opacity: 0 }, 5, Q.Easing.Quadratic.In, { callback: function() { 
+				var sprite3 = new Q.Sprite({ asset: "creditos_jorge.png", x: 256, y: 192, scale: 0.64 });
+				stage.insert(sprite3);
+				sprite3.add("tween");
+				sprite3.chain({opacity: 0 }, 5, Q.Easing.Quadratic.In, { callback: function() { 
+					var sprite4 = new Q.Sprite({ asset: "creditos_santi.png", x: 256, y: 192, scale: 0.64 });
+					stage.insert(sprite4);
+					sprite4.add("tween");
+					sprite4.chain({opacity: 0 }, 5, Q.Easing.Quadratic.In, { callback: function() {
+						Q.clearStages();
+						Q.stageScene("menu");
+					} })
+				} })
+			} })
+		} })
+	});
 }

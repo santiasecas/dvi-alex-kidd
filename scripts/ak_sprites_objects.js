@@ -135,11 +135,30 @@ Quintus.AKSpritesObjects = function(Q) {
 				gravity: 0
 			});
 			this.add("animation");
-			this.play("point");
+			this.play("light");
 		}
 	});
 	
 	Q.animations("LogoAnimation", {
-		point: { frames: [0,1], rate: 1/8}
+		light: { frames: [0,1], rate: 1/8}
+	});
+	
+	Q.Sprite.extend("Rice",{
+		init: function(p){
+			this._super(p, {
+				sheet: 'escenary',
+                frame: 17,
+				x: 32,
+                y: 32,
+				gravity: 0,
+				sensor: true
+			});
+			this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("Alex")) {
+					Q.clearStages();
+					Q.stageScene("creditos");
+				}
+            });
+		}
 	});
 }
