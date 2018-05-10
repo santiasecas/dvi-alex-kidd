@@ -22,7 +22,6 @@ Quintus.AKSpritesObjects = function(Q) {
                     this.drop();
                 }
             });
-
         }
     });
 
