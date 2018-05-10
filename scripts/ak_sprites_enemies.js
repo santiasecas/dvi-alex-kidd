@@ -21,7 +21,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 gravity: 0,
                 vx: 100
             });
-            this.add("2d, animation, aiBounce");
+            this.add("2d, animation, aiBounce, defaultEnemy");
             this.play("fly_right");
             this.on("bump.left", function(collision) {
                 this.play("fly_right");
@@ -54,7 +54,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 sprite: 'ScorpionAnimation',
                 vx: 50
             });
-            this.add("2d, animation, aiBounce");
+            this.add("2d, animation, aiBounce, defaultEnemy");
             this.play("move_right");
             this.on("bump.left", function(collision) {
                 this.play("move_right");
@@ -96,7 +96,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 vy: 0,
                 mirandoDerecha: false
             });
-            this.add("2d, animation, aiBounce");
+            this.add("2d, animation, aiBounce, defaultEnemy");
             this.play("stand_left"); // Mirando hacia la derecha
 
             //Si la rana toca el suelo esta se debe de quedar quieta
@@ -239,5 +239,27 @@ Quintus.AKSpritesEnemies = function(Q) {
         stand_right: { frames: [0, 1], flip: 'x', rate: 1, loop: true },
         stand_left: { frames: [0, 1], flip: false, rate: 1, loop: true }
     });
-
+	
+	/**===========================================================================================
+     * 
+     *                                    DEFAULT ENEMIES
+     * 
+     ============================================================================================*/
+	Q.component("defaultEnemy", {
+		added: function(){
+			this.entity.on("hit.sprite", function(collision) {
+				if(collision.obj.isA("AlexFist")) {
+					this.destroy();
+					Q.stage().insert(new Q.SmokeEnemyDie({x:this.p.x, y:this.p.y}));
+					//Q.state.inc("score", 100);
+				}
+				//else if(collision.obj.isA("Alex")) {
+				//	collision.obj.AlexDeath();
+				//}
+			});
+			this.entity.on("destroy", function(){ 
+				this.destroy(); 
+			});
+		}
+	});
 }

@@ -184,4 +184,26 @@ Quintus.AKSpritesObjects = function(Q) {
             });
 		}
 	});
+	
+	Q.Sprite.extend("SmokeEnemyDie",{
+		init: function(p){
+			this._super(p, {
+				sheet: 'enemyDie',
+				sprite: 'SmokeEnemyDieAnimation',
+				gravity: 0,
+				sensor: true,
+				type: Q.SPRITE_NONE,
+				collisionMask: ''
+			});
+			this.add("animation");
+			this.play("die");
+			this.on("destroy", function(){ 
+				this.destroy();
+			});
+		}
+	});
+	
+	Q.animations("SmokeEnemyDieAnimation", {
+		die: { frames: [0,1], rate: 1/2, loop: false,  trigger: "destroy"}
+	});
 }
