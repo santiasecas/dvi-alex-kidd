@@ -83,11 +83,11 @@ Quintus.AKSpritesPlayer = function(Q) {
 			this.on('destroy', function(){ 
 				this.destroy();
 			});
-			this.on("hit.sprite", function(collision) {
+			/*this.on("hit.sprite", function(collision) {
 				if (!collision.obj.isA("Alex")) {
 					this.destroy();
 				}
-            });
+            });*/
 		},
 		step: function(dt) {
 			if(true) {

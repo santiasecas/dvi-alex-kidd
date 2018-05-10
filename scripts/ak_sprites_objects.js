@@ -13,6 +13,26 @@ Quintus.AKSpritesObjects = function(Q) {
                 sheet: 'escenary',
 				frame: 9,
                 gravity: 0,
+                dropped: false
+            });
+            this.add("2d, drops");
+
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist")) {
+                    this.drop(0);
+                    this.destroy();
+                }
+            });
+        }
+    });
+
+    Q.Sprite.extend("StarBlock", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+				frame: 8,
+                gravity: 0,
+                dropped: false
             });
             this.add("2d, drops");
 
@@ -25,19 +45,19 @@ Quintus.AKSpritesObjects = function(Q) {
         }
     });
 
-    Q.Sprite.extend("StarBlock", {
+    Q.Sprite.extend("GhostBlock", {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-				frame: 8,
+				frame: 16,
                 gravity: 0,
+                dropped: false
             });
             this.add("2d, drops");
 
-            this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) {
-                    this.destroy();
-                    this.drop();
+            this.on("bump.top", function(collision) {
+                if (collision.obj.isA("Alex")) {
+                    this.drop(-32);
                 }
             });
         }
@@ -50,11 +70,10 @@ Quintus.AKSpritesObjects = function(Q) {
 				frame: 7,
                 gravity: 0,
             });
-            this.add("2d, drops");
+            this.add("2d");
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
                     this.destroy();
-                    this.drop();
                 }
             });
         }
@@ -72,6 +91,7 @@ Quintus.AKSpritesObjects = function(Q) {
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("Alex")) {
                     Q.audio.play("coin.ogg");
+                    console.log("saco");
 					this.destroy();
                 };
             });
@@ -98,9 +118,13 @@ Quintus.AKSpritesObjects = function(Q) {
     
     Q.component("drops", {
         extend: {
-            drop: function() {
-                if(this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
-                if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
+            drop: function(offsetY) {
+                if (!this.p.dropped) {
+                    this.p.dropped = true;
+                    if(this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
+                    if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
+                    if(this.p.drop === 'ghost') this.stage.insert(new Q.Ghost({ x: this.p.x, y: this.p.y+offsetY }));
+                };
             },
         }
     })

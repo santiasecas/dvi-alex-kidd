@@ -38,7 +38,7 @@ window.addEventListener("load", function() {
         Q.sheet("ghost", "ghost.png", { tilew: 32, tileh: 32 });
 		Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
         Q.loadTMX("level1.tmx", function() {
-            Q.stageScene("menu");
+            Q.stageScene("level1");
         });
     });
 });
