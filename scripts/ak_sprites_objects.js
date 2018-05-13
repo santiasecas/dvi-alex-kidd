@@ -40,6 +40,11 @@ Quintus.AKSpritesObjects = function(Q) {
                 if (collision.obj.isA("AlexFist")) {
                     this.destroy();
                     this.drop();
+                    if((Math.random() * (10 - 1) + 1) < 7){
+                      this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
+                    }else{
+                      this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
+                    }
                 }
             });
         }
@@ -109,7 +114,7 @@ Quintus.AKSpritesObjects = function(Q) {
             this.add("2d");
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("Alex")){
-					this.destroy();
+					          this.destroy();
                     Q.audio.play("coin.ogg");
                 };
             });
@@ -122,7 +127,7 @@ Quintus.AKSpritesObjects = function(Q) {
                 if (!this.p.dropped) {
                     this.p.dropped = true;
                     if(this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
-                    if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
+                    if(this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
                     if(this.p.drop === 'ghost') this.stage.insert(new Q.Ghost({ x: this.p.x, y: this.p.y+offsetY }));
                 };
             },
