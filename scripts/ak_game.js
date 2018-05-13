@@ -36,8 +36,8 @@ window.addEventListener("load", function() {
         Q.sheet("alexmap", "alexmap.png", { tilew: 64, tileh: 90 });
         Q.sheet("arrow", "arrow.png", { tilew: 15, tileh: 24 });
         Q.sheet("ghost", "ghost.png", { tilew: 32, tileh: 32 });
-		Q.sheet("enemyDie", "enemyDie.png", { tilew: 32, tileh: 32 });
-		Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
+    		Q.sheet("enemyDie", "enemyDie.png", { tilew: 32, tileh: 32 });
+    		Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
         Q.loadTMX("level1.tmx", function() {
             Q.stageScene("level1");
         });

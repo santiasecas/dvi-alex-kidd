@@ -11,7 +11,7 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-				frame: 9,
+				        frame: 9,
                 gravity: 0,
                 dropped: false
             });
@@ -30,7 +30,7 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-				frame: 8,
+				        frame: 8,
                 gravity: 0,
                 dropped: false
             });
@@ -49,7 +49,7 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-				frame: 16,
+				        frame: 16,
                 gravity: 0,
                 dropped: false
             });
@@ -67,7 +67,7 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-				frame: 7,
+				        frame: 7,
                 gravity: 0,
             });
             this.add("2d");
@@ -115,7 +115,7 @@ Quintus.AKSpritesObjects = function(Q) {
             });
         }
     });
-    
+
     Q.component("drops", {
         extend: {
             drop: function(offsetY) {
@@ -128,7 +128,7 @@ Quintus.AKSpritesObjects = function(Q) {
             },
         }
     })
-	
+
 	Q.Sprite.extend("Arrow",{
 		init: function(p){
 			this._super(p, {
@@ -142,11 +142,11 @@ Quintus.AKSpritesObjects = function(Q) {
 			this.play("point");
 		}
 	});
-	
+
 	Q.animations("ArrowAnimation", {
 		point: { frames: [0,1], rate: 1/2}
 	});
-	
+
 	Q.Sprite.extend("Logo",{
 		init: function(p){
 			this._super(p, {
@@ -161,11 +161,11 @@ Quintus.AKSpritesObjects = function(Q) {
 			this.play("light");
 		}
 	});
-	
+
 	Q.animations("LogoAnimation", {
 		light: { frames: [0,1], rate: 1/8}
 	});
-	
+
 	Q.Sprite.extend("Rice",{
 		init: function(p){
 			this._super(p, {
@@ -184,7 +184,7 @@ Quintus.AKSpritesObjects = function(Q) {
             });
 		}
 	});
-	
+
 	Q.Sprite.extend("SmokeEnemyDie",{
 		init: function(p){
 			this._super(p, {
@@ -197,12 +197,12 @@ Quintus.AKSpritesObjects = function(Q) {
 			});
 			this.add("animation");
 			this.play("die");
-			this.on("destroy", function(){ 
+			this.on("destroy", function(){
 				this.destroy();
 			});
 		}
 	});
-	
+
 	Q.animations("SmokeEnemyDieAnimation", {
 		die: { frames: [0,1], rate: 1/2, loop: false,  trigger: "destroy"}
 	});

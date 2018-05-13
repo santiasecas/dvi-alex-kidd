@@ -8,7 +8,7 @@
 
 Quintus.AKSpritesPlayer = function(Q) {
 	Q.SPRITE_NONE = 0
-	
+
 	Q.Sprite.extend("Alex",{
 		init: function(p){
 			this._super(p, {
@@ -20,9 +20,9 @@ Quintus.AKSpritesPlayer = function(Q) {
 				punching: 0
 			});
 			this.add('2d, platformerControls, animation, tween');
-			this.on('noPunch', function(){ 
+			this.on('noPunch', function(){
 				this.play("stand_" + this.p.direction);
-				
+
 			});
 		},
 		step: function(dt) {
@@ -48,7 +48,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 					this.play("jump_" + this.p.direction);
 				}
 				else if(this.p.vx < 0 || this.p.vx > 0) {
-					this.play("run_" + this.p.direction); 
+					this.play("run_" + this.p.direction);
 				}
 				else {
 					if(this.p.vy != 0) this.play("jump_" + this.p.direction);
@@ -56,7 +56,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 				}
 			}
 		}
-	}); 
+	});
 
 	Q.animations("AlexAnimation", {
 		run_right: { frames: [0, 1, 2, 3], flip: false, rate: 1/4},
@@ -69,7 +69,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 		crouch_right: { frames: [10], flip: false, loop: false},
 		crouch_left: { frames: [10], flip: 'x', loop: false}
 	});
-	
+
 	//SPRITE DEL PUÑO DE ALEX
 	Q.Sprite.extend("AlexFist",{
 		init: function(p){
@@ -80,7 +80,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 				collisionMask:''
 			});
 			this.add('2d, animation');
-			this.on('destroy', function(){ 
+			this.on('destroy', function(){
 				this.destroy();
 			});
 			/*this.on("hit.sprite", function(collision) {
@@ -102,7 +102,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 			}
 		}
 	});
-	
+
 	//SPRITE DE ALEX EN EL MENU DEL MAPA
 	Q.Sprite.extend("AlexMap",{
 		init: function(p){
@@ -123,7 +123,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 			}
 		}
 	});
-	
+
 	Q.animations("AlexMapAnimation", {
 		eating: { frames: [0,1], rate: 1/2}
 	});
