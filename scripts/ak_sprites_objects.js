@@ -38,13 +38,13 @@ Quintus.AKSpritesObjects = function(Q) {
 
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
+                    if((Math.random() * (10 - 1) + 1) < 7){
+                      this.p.drop='sackLittle';
+                    }else{
+                      this.p.drop='sackBig';
+                    }
                     this.destroy();
                     this.drop();
-                    if((Math.random() * (10 - 1) + 1) < 7){
-                      this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
-                    }else{
-                      this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
-                    }
                 }
             });
         }
