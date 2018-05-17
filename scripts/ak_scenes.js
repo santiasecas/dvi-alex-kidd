@@ -15,9 +15,9 @@ Quintus.AKScenes = function(Q) {
         //Q.audio.play('main_theme.ogg',{loop: true});
         Q.stageTMX('level1.tmx', stage);
         var alex = stage.insert(new Q.Alex({ x: 100, y: 200 }));
-        //  stage.insert(new Q.Bird({ x: 200, y: 200 }));
+        stage.insert(new Q.Bird({ x: 200, y: 200 }));
         stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
-        stage.insert(new Q.Frog({ x: 110, y: 200 }));
+        stage.insert(new Q.Frog({ x: 150, y: 200 }));
         stage.insert(new Q.Question({ x: 464, y: 431, drop: 'ghost' }));
         stage.insert(new Q.Question({ x: 368, y: 1072, drop: 'ghost' }));
         stage.insert(new Q.GhostBlock( {x: 240, y: 1616, drop: 'ghost'}));
@@ -243,5 +243,33 @@ Quintus.AKScenes = function(Q) {
 				} })
 			} })
 		} })
+	});
+	
+	/*
+	 ******************************************
+	 ****************   HUD   *****************
+	 ******************************************
+	 */
+
+	//MARCADOR DE VIDAS
+	Q.scene('lives', function(stage){
+		var lives = stage.insert(new Q.AlexHud({
+			x: 40,
+			y: 25,
+			scale: 0.7
+		}));
+		var lives2 = stage.insert(new Q.UI.Text({
+			x: 60,
+			y: 25, 
+			size: 8,
+			align: 'left',
+			color: '#fff',
+			family: 'Alex Kidd in Miracle World',
+			//label: 'Vidas'
+			label: '' + Q.state.p.lives
+		}));
+		Q.state.on("change.lives", this, function( lives ) {
+			lives2.p.label = '\n x ' + lives;
+		});	
 	});
 }

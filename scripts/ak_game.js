@@ -27,7 +27,7 @@ window.addEventListener("load", function() {
 		"arrow.png", "logo.png", "creditos.png","creditos_dani.png",
 		"creditos_edu.png", "creditos_jorge.png", "creditos_santi.png",
 		"menu.mp3","menu.ogg","map.ogg","map.mp3", "credits.mp3", "credits.ogg",
-		"enemyDie.png"], function() {
+		"enemyDie.png", "alexhud.png"], function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
         Q.sheet("bird", "bird.png", { tilew: 48, tileh: 32 });
         Q.sheet("scorpion", "scorpion.png", { tilew: 32, tileh: 28 });
@@ -36,10 +36,11 @@ window.addEventListener("load", function() {
         Q.sheet("alexmap", "alexmap.png", { tilew: 64, tileh: 90 });
         Q.sheet("arrow", "arrow.png", { tilew: 15, tileh: 24 });
         Q.sheet("ghost", "ghost.png", { tilew: 32, tileh: 32 });
-    		Q.sheet("enemyDie", "enemyDie.png", { tilew: 32, tileh: 32 });
-    		Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
+    	Q.sheet("enemyDie", "enemyDie.png", { tilew: 32, tileh: 32 });
+    	Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
         Q.loadTMX("level1.tmx", function() {
             Q.stageScene("level1");
+			Q.stageScene("lives", 2)
         });
     });
 });
