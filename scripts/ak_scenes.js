@@ -148,6 +148,7 @@ Quintus.AKScenes = function(Q) {
             if (this.p.action == true && Q.inputs['fire']) {
                 Q.clearStages();
                 Q.stageScene("map");
+				Q.state.reset({ lives: 3, coins:0, rings:0});
             }
         }
     });
@@ -203,8 +204,7 @@ Quintus.AKScenes = function(Q) {
         },
         step: function(dt) {
             if (Q.inputs['action']) {
-                Q.clearStages();
-                Q.stageScene("level1");
+                startGame();
             }
         }
     });
@@ -250,26 +250,97 @@ Quintus.AKScenes = function(Q) {
 	 ****************   HUD   *****************
 	 ******************************************
 	 */
-
 	//MARCADOR DE VIDAS
 	Q.scene('lives', function(stage){
 		var lives = stage.insert(new Q.AlexHud({
-			x: 40,
+			x: 50,
 			y: 25,
 			scale: 0.7
 		}));
+		var vidas = Q.state.p.lives.toString();
+		while(vidas.length < 5) {
+			vidas = '0' + vidas;
+		}
 		var lives2 = stage.insert(new Q.UI.Text({
-			x: 60,
+			x: 70,
 			y: 25, 
-			size: 8,
+			size: 10,
 			align: 'left',
 			color: '#fff',
 			family: 'Alex Kidd in Miracle World',
-			//label: 'Vidas'
-			label: '' + Q.state.p.lives
+			label: vidas
 		}));
 		Q.state.on("change.lives", this, function( lives ) {
-			lives2.p.label = '\n x ' + lives;
+			lives2.p.label = vidas;
 		});	
 	});
-}
+	
+	function monedas() {
+		var monedas = Q.state.p.coins.toString();
+		while(monedas.length < 5) {
+			monedas = '0' + monedas;
+		}
+		return monedas;
+	}
+
+	//MARCADOR DE MONEDAS
+	Q.scene('coins', function(stage){
+		var coins = stage.insert(new Q.SackLittle({
+			x: 230,
+			y: 20
+		}));
+		var coins2 = stage.insert(new Q.UI.Text({
+			x: 250,
+			y: 25, 
+			size: 10,
+			align: 'left',
+			color: '#fff',
+			family: 'Alex Kidd in Miracle World',
+			label: monedas()
+		}));
+		Q.state.on("change.coins", this, function( coins ) {
+			coins2.p.label = monedas();
+		});	
+	});
+	
+	//MARCADOR DE ANILLOS
+	Q.scene('rings', function(stage){
+		var rings = stage.insert(new Q.Ring({
+			x: 400,
+			y: 25,
+			scale: 0.85
+		}));
+		var anillos = Q.state.p.rings.toString();
+		while(anillos.length < 5) {
+			anillos = '0' + anillos;
+		}
+		var rings2 = stage.insert(new Q.UI.Text({
+			x: 420,
+			y: 25, 
+			size: 10,
+			align: 'left',
+			color: '#fff',
+			family: 'Alex Kidd in Miracle World',
+			label: anillos
+		}));
+		Q.state.on("change.rings", this, function( rings ) {
+			rings2.p.label = '\n x ' + rings;
+		});	
+	});
+	
+	//CARGA JUEGO
+	function startGame() {
+		Q.loadTMX("level1.tmx", function() {
+			Q.audio.stop();
+			Q.clearStages();
+			Q.audio.stop();
+			Q.audio.play("music_main.ogg", { loop: true});
+			Q.stageScene("level1");
+			Q.stageScene("hud", 2);
+			Q.stageScene("lives", 3);
+			Q.stageScene("coins", 4);
+			Q.stageScene("rings", 5);
+		});
+	}
+};
+

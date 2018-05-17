@@ -15,7 +15,7 @@ Quintus.AKSpritesObjects = function(Q) {
                 gravity: 0,
                 dropped: false
             });
-            this.add("2d, drops");
+            this.add("2d, drops, brokeBox");
 
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
@@ -34,7 +34,7 @@ Quintus.AKSpritesObjects = function(Q) {
                 gravity: 0,
                 dropped: false
             });
-            this.add("2d, drops");
+            this.add("2d, drops, brokeBox");
 
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
@@ -75,32 +75,42 @@ Quintus.AKSpritesObjects = function(Q) {
 				        frame: 7,
                 gravity: 0,
             });
-            this.add("2d");
-            this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) {
+            this.add("2d, brokeBox");
+        }
+    });
+	
+	Q.component("brokeBox", {
+		added: function(){
+			this.entity.on("hit.sprite", function(collision) {
+				if (collision.obj.isA("AlexFist")) {
                     this.stage.insert(new Q.MiniRockRight({ x: this.p.x + 10, y: this.p.y + 10}));
                     this.stage.insert(new Q.MiniRockLeft({ x: this.p.x - 10, y: this.p.y + 10}));
                     this.stage.insert(new Q.MiniRockRight({ x: this.p.x + 5, y: this.p.y - 10}));
                     this.stage.insert(new Q.MiniRockLeft({ x: this.p.x - 5, y: this.p.y - 10}));
                     this.destroy();
                 }
-            });
-        }
-    });
-
+			});
+			this.entity.on("destroy", function(){ 
+				this.destroy(); 
+			});
+		}
+	});
+	
     Q.Sprite.extend("SackLittle", {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
                 frame: 12,
                 sensor: true,
-                gravity: 0
+                gravity: 0,
+				taken: false
             });
             this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) {
+                if (collision.obj.isA("Alex") && !this.p.taken) {
+					this.p.taken = true;
                     Q.audio.play("coin.ogg");
-                    console.log("saco");
+					Q.state.inc("coins", 10);
 					this.destroy();
                 };
             });
@@ -113,13 +123,16 @@ Quintus.AKSpritesObjects = function(Q) {
                 sheet: 'escenary',
                 frame: 11,
                 sensor: true,
-                gravity: 0
+                gravity: 0,
+				taken: false
             });
             this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")){
-					          this.destroy();
-                    Q.audio.play("coin.ogg");
+                if (collision.obj.isA("Alex") && !this.p.taken){
+					this.p.taken = true;
+					Q.audio.play("coin.ogg");
+					Q.state.inc("coins", 20);
+					this.destroy();
                 };
             });
         }
@@ -231,7 +244,7 @@ Quintus.AKSpritesObjects = function(Q) {
 				sensor: true
 			});
 			this.add('tween');
-			this.animate({x: this.p.x - 50, y: this.p.y + 150 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
+			this.animate({x: this.p.x - 40, y: this.p.y + 140 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
 				this.destroy();}
 			});
 		}
@@ -244,9 +257,18 @@ Quintus.AKSpritesObjects = function(Q) {
 				sensor: true
 			});
 			this.add('tween');
-			this.animate({x: this.p.x + 50, y: this.p.y + 150 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
+			this.animate({x: this.p.x + 40, y: this.p.y + 140 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
 				this.destroy();}
 			});
 		}
+    });
+	
+	Q.Sprite.extend("Ring", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+                frame: 13
+            });
+        }
     });
 }
