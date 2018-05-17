@@ -78,6 +78,10 @@ Quintus.AKSpritesObjects = function(Q) {
             this.add("2d");
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
+                    this.stage.insert(new Q.MiniRockRight({ x: this.p.x + 10, y: this.p.y + 10}));
+                    this.stage.insert(new Q.MiniRockLeft({ x: this.p.x - 10, y: this.p.y + 10}));
+                    this.stage.insert(new Q.MiniRockRight({ x: this.p.x + 5, y: this.p.y - 10}));
+                    this.stage.insert(new Q.MiniRockLeft({ x: this.p.x - 5, y: this.p.y - 10}));
                     this.destroy();
                 }
             });
@@ -218,5 +222,31 @@ Quintus.AKSpritesObjects = function(Q) {
 				asset: 'alexhud.png'
 			});
 		}
-	});
+    });
+    
+    Q.Sprite.extend("MiniRockLeft",{
+		init: function(p){
+			this._super(p, {
+                asset: 'minirock.png',
+				sensor: true
+			});
+			this.add('tween');
+			this.animate({x: this.p.x - 50, y: this.p.y + 150 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
+				this.destroy();}
+			});
+		}
+    });
+
+    Q.Sprite.extend("MiniRockRight",{
+		init: function(p){
+			this._super(p, {
+                asset: 'minirock.png',
+				sensor: true
+			});
+			this.add('tween');
+			this.animate({x: this.p.x + 50, y: this.p.y + 150 }, 0.6, Q.Easing.Quadratic.In, { callback: function() {
+				this.destroy();}
+			});
+		}
+    });
 }
