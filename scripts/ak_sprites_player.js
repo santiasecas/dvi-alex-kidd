@@ -29,6 +29,9 @@ Quintus.AKSpritesPlayer = function(Q) {
 	 		this.on("hit.sprite", function(collision) {
 				if (collision.obj.isA("Frog") || collision.obj.isA("Scorpion") || collision.obj.isA("Ghost") || collision.obj.isA("Bird")) {
 					this.p.muerto = true;
+					if(Q.stages[0].lists["AlexFist"][0] !== undefined) {
+						Q.stages[0].lists["AlexFist"][0].destroy();
+					}
 				}
             });
 		},
