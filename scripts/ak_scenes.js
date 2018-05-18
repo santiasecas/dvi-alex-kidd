@@ -11,12 +11,16 @@ Quintus.AKScenes = function(Q) {
         return { x: +a * 32 + 16, y: b * 32 + 16 };
     }
 
+    Q.scene("die", function(stage) {
+        startGame();
+    });
+
     Q.scene("level1", function(stage) {
         //Q.audio.play('main_theme.ogg',{loop: true});
         Q.stageTMX('level1.tmx', stage);
         stage.insert(new Q.Mountain({ x: 128, y: 3408 }));
         stage.insert(new Q.Mountain({ x: 288, y: 3408 }));
-        stage.insert(new Q.Mountain({ x: 416, y: 3408 }));
+        //stage.insert(new Q.Mountain({ x: 416, y: 3408 }));
         var alex = stage.insert(new Q.Alex({ x: 100, y: 200 }));
         stage.insert(new Q.Bird({ x: 200, y: 200 }));
         stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
@@ -345,7 +349,7 @@ Quintus.AKScenes = function(Q) {
             Q.audio.stop();
             Q.clearStages();
             Q.audio.stop();
-            Q.audio.play("music_main.ogg", { loop: true });
+            //Q.audio.play("music_main.ogg", { loop: true });
             Q.stageScene("level1");
             Q.stageScene("hud", 2);
             Q.stageScene("lives", 3);
