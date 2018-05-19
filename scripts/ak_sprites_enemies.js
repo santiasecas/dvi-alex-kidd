@@ -19,7 +19,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 sheet: 'bird',
                 sprite: 'BirdAnimation',
                 gravity: 0,
-                vx: 100,
+                vx: 60,
                 died: false
             });
             this.add("2d, animation, aiBounce, defaultEnemy");

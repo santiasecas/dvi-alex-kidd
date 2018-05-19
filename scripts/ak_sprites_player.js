@@ -91,7 +91,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 
         die: function() {
             Q.state.dec("lives", 1);
-            Q.audio.play("game_over.ogg");
+            Q.audio.play("die_alex.ogg");
             this.play("dying");
             this.p.vy = -65;
         }
