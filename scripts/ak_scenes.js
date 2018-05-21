@@ -260,6 +260,34 @@ Quintus.AKScenes = function(Q) {
         stage.insert(new Q.Arrow);
     });
 
+    Q.Sprite.extend("endKey", {
+        init: function(p) {
+            this._super(p, {
+                x: 0,
+                y: 0,
+            });
+        },
+        step: function(dt) {
+            if (Q.inputs['action']) { //Tecla X
+                startGame();
+            }
+        }
+    });
+
+    Q.scene('endGame',function(stage) {
+        var container = stage.insert(new Q.UI.Container({
+          x: Q.width/2, y: Q.height/2, fill: "black"
+        }));
+        var label1 = container.insert(new Q.UI.Text({x:-30, y:-45, color: "white",
+                                                         label: "GAME OVER"}));
+        var label2 = container.insert(new Q.UI.Text({x:-20, y: 10, color: "white",
+                                                         label: ("SCORE:              " + stage.options.score)}));
+      
+        container.fit(Q.height);
+        Q.audio.play("game_over.ogg")
+        stage.insert(new Q.endKey);
+      });
+
     Q.scene("creditos", function(stage) {
         Q.audio.stop();
         Q.audio.play("credits.ogg");

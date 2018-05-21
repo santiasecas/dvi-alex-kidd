@@ -90,10 +90,17 @@ Quintus.AKSpritesPlayer = function(Q) {
         },
 
         die: function() {
-            Q.state.dec("lives", 1);
             Q.audio.play("die_alex.ogg");
             this.play("dying");
-            this.p.vy = -65;
+            if (Q.state.get("lives") === 3) {
+                Q.clearStages();
+                Q.stageScene("endGame", 1, {score: Q.state.get("coins")});
+            }
+            else {
+                Q.state.dec("lives", 1);
+                this.p.vy = -65;
+                
+            }
         }
 
     });
