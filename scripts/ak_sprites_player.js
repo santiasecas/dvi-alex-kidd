@@ -92,15 +92,8 @@ Quintus.AKSpritesPlayer = function(Q) {
         die: function() {
             Q.audio.play("die_alex.ogg");
             this.play("dying");
-            if (Q.state.get("lives") === 3) {
-                Q.clearStages();
-                Q.stageScene("endGame", 1, {score: Q.state.get("coins")});
-            }
-            else {
-                Q.state.dec("lives", 1);
-                this.p.vy = -65;
-                
-            }
+            Q.state.dec("lives", 1);
+            this.p.vy = -65;
         }
 
     });
