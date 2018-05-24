@@ -118,7 +118,9 @@ Quintus.AKSpritesPlayer = function(Q) {
                 asset: 'fist.png',
                 gravity: 0,
                 sensor: true,
-                collisionMask: ''
+                collisionMask: '',
+                duration: 0.5,
+                count: 0
             });
             this.add('2d, animation');
             this.on('destroy', function() {
@@ -139,6 +141,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                 } else if (alex.p.direction == 'left') {
                     this.p.x = alex.p.x - 24;
                 }
+            }
+            this.p.count += dt;
+            if (this.p.count > this.p.duration) {
+                this.destroy();
             }
         }
     });
