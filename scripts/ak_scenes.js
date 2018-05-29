@@ -344,6 +344,26 @@ Quintus.AKScenes = function(Q) {
         })
     });
 
+    /*Q.scene('bossFinalGame', function(stage) {
+        var container = stage.insert(new Q.UI.Container({
+            x: Q.width / 2,
+            y: Q.height / 2,
+            fill: "transparent"
+        }));
+        var label1 = container.insert(new Q.UI.Text({
+            x: -20,
+            y: -45,
+            size: 16,
+            color: 'transparent',
+            family: 'Alex Kidd in Miracle World',
+            label: "GAME OVER"
+        }));
+
+        //container.fit(100);
+        //Q.audio.play("game_over.ogg")
+        //stage.insert(new Q.endKey);
+    });*/
+
     /*
      ******************************************
      ****************   HUD   *****************

@@ -59,7 +59,6 @@ Quintus.AKSpritesPlayer = function(Q) {
                 this.p.x = 160;
                 this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
                 glob = Q.stage().insert(new Q.AlexFinalGame());
-                //glob.play("playing");
               }else{
                 //GOLPEAR
                 if (Q.inputs['fire'] && this.p.punching == 0) {

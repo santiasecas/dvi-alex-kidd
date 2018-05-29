@@ -252,18 +252,6 @@ Quintus.AKSpritesEnemies = function(Q) {
                 muerto: false,
                 llamado: false
             });
-            /*this.add("2d, animation, aiBounce, defaultEnemy");
-            this.play("move_right");
-            this.on("bump.left", function(collision) {
-                this.play("move_right");
-            });
-            this.on("bump.right", function(collision) {
-                this.play("move_left");
-            });
-            this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist")) this.destroy();
-            });*/
-
         }
     });
 
