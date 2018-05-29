@@ -32,6 +32,8 @@ Quintus.AKSpritesPlayer = function(Q) {
                     if (Q.stages[0].lists["AlexFist"] !== undefined) {
                         Q.stages[0].lists["AlexFist"][0].destroy();
                     }
+                }else if(collision.obj.isA("Rice")){
+                  this.p.boss = true;
                 }
             });
         },
@@ -45,6 +47,20 @@ Quintus.AKSpritesPlayer = function(Q) {
                 Q.stageScene("die");
             }
             if (!this.p.muerto) {
+              // Apartado del BOSS
+              if (this.p.boss) {
+                Q.stages[0].unfollow();
+                this.del('platformerControls');
+                this.p.vx = 0;
+                this.p.gravity = 0;
+                this.p.collisionMask = '';
+                this.p.sensor = true;
+                this.play("stand_" + 'right');
+                this.p.x = 160;
+                this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                glob = Q.stage().insert(new Q.AlexFinalGame());
+                //glob.play("playing");
+              }else{
                 //GOLPEAR
                 if (Q.inputs['fire'] && this.p.punching == 0) {
                     fist = Q.stage().insert(new Q.AlexFist());
@@ -70,7 +86,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                         if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
                     }
                 }
-            } else {
+              }
+            }
+
+            else {
                 if (!this.p.llamado) {
                     Q.stages[0].unfollow();
                     this.del('platformerControls');
@@ -126,11 +145,11 @@ Quintus.AKSpritesPlayer = function(Q) {
             this.on('destroy', function() {
                 this.destroy();
             });
-            /*this.on("hit.sprite", function(collision) {
-				if (!collision.obj.isA("Alex")) {
-					this.destroy();
-				}
-            });*/
+            this.on("hit.sprite", function(collision) {
+      				if (!collision.obj.isA("Alex")) {
+      					this.destroy();
+      				}
+            });
         },
         step: function(dt) {
             if (true) {
@@ -173,4 +192,39 @@ Quintus.AKSpritesPlayer = function(Q) {
     Q.animations("AlexMapAnimation", {
         eating: { frames: [0, 1], rate: 1 / 2 }
     });
+
+    //SPRITE DEL JUEGO FINAL
+    Q.Sprite.extend("AlexFinalGame", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'final-game',
+                sprite: 'final-game',
+                gravity: 0,
+                count: 0
+            });
+            this.add("animation");
+            this.play("movement");
+            /*this.on("hit.sprite", function(collision) {
+				if (!collision.obj.isA("Alex")) {
+					this.destroy();
+				}
+            });*/
+        },
+        step: function(dt) {
+            if (true) {
+                alex = Q.stage().lists.Alex[0];
+                this.p.y = alex.p.y - 100;
+                this.p.x = alex.p.x - 5;
+            }
+            this.p.count += dt;
+            if (this.p.count > this.p.duration) {
+                this.destroy();
+            }
+        }
+    });
+
+    Q.animations('final-game', {
+        movement: { frames: [0,1,2], rate: 1/30 }
+    });
+
 }

@@ -209,8 +209,10 @@ Quintus.AKSpritesObjects = function(Q) {
             });
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("Alex")) {
-                    Q.clearStages();
-                    Q.stageScene("creditos");
+                    this.del('platformerControls');
+                    this.destroy();
+                    /*Q.clearStages();
+                    Q.stageScene("creditos");*/
                 }
             });
         }
