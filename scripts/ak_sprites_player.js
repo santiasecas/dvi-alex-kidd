@@ -58,7 +58,17 @@ Quintus.AKSpritesPlayer = function(Q) {
                 this.play("stand_" + 'right');
                 this.p.x = 160;
                 this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
-                glob = Q.stage().insert(new Q.AlexFinalGame());
+                tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200}));
+                //console.log(tfinal.p.count);
+                if (Q.inputs['fire'] && tfinal.p.count == 0){
+                  tfinal.p.count = 1;
+                  console.log(tfinal.p.count);
+                  tfinal.p.frame = 1;
+                } else if (Q.inputs['fire'] && tfinal.p.count == 1){
+                  console.log("dentro");
+                  glob = this.stage().insert(new Q.AlexFinalGame());
+                  tfinal.p.count == 2;
+                }
               }else{
                 //GOLPEAR
                 if (Q.inputs['fire'] && this.p.punching == 0) {

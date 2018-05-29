@@ -30,11 +30,12 @@ window.addEventListener("load", function() {
         "enemyDie.png", "alexhud.png", "minirock.png", "mountain.png", "star_box.mp3",
         "star_box.ogg", "break_box.ogg", "break_box.mp3", "kill_enemy.mp3", "kill_enemy.ogg",
         "game_over.mp3", "game_over.ogg", "die_alex.mp3", "die_alex.ogg", "gooseka.png",
-        "final-game.png"
+        "final-game.png", "final-game-titles.png"
     ], function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
         Q.sheet("gooseka", "gooseka.png", { tilew: 23, tileh: 48 });
         Q.sheet("final-game", "final-game.png", { tilew: 68, tileh: 64 });
+        Q.sheet("final-game-titles", "final-game-titles.png", { tilew: 137, tileh: 36 });
         Q.sheet("bird", "bird.png", { tilew: 48, tileh: 32 });
         Q.sheet("scorpion", "scorpion.png", { tilew: 32, tileh: 28 });
         Q.sheet("frog", "frog.png", { tilew: 32, tileh: 48 });

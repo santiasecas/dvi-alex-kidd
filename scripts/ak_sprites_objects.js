@@ -297,4 +297,22 @@ Quintus.AKSpritesObjects = function(Q) {
             });
         }
     });
+
+    Q.Sprite.extend("TitleFinalGame", {
+      init: function(p) {
+          this._super(p, {
+              sheet: 'final-game-titles',
+              sprite: 'TitleFinalGameAnimation',
+              scale: 3.0,
+              count: 0,
+              frame: 0
+          });
+      }
+            /*this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist") && !this.p.broken) {
+                    this.p.broken = true;
+                    Q.audio.play("break_box.ogg");
+                }
+            });*/
+    });
 }
