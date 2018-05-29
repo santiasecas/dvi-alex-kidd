@@ -9,9 +9,9 @@
 
 Quintus.AKSpritesEnemies = function(Q) {
     /**===========================================================================================
-     * 
+     *
      *                                         BIRD
-     * 
+     *
      ===========================================================================================*/
     Q.Sprite.extend("Bird", {
         init: function(p) {
@@ -43,9 +43,9 @@ Quintus.AKSpritesEnemies = function(Q) {
     });
 
     /**===========================================================================================
-     * 
+     *
      *                                          SCORPION
-     * 
+     *
      ===========================================================================================*/
     Q.Sprite.extend("Scorpion", {
         init: function(p) {
@@ -79,9 +79,9 @@ Quintus.AKSpritesEnemies = function(Q) {
     });
 
     /**===========================================================================================
-     * 
+     *
      *                                         FROG
-     * 
+     *
      ===========================================================================================*/
     Q.Sprite.extend("Frog", {
         init: function(p) {
@@ -170,9 +170,9 @@ Quintus.AKSpritesEnemies = function(Q) {
 
 
     /**===========================================================================================
-     * 
+     *
      *                                          GHOST
-     * 
+     *
      ===========================================================================================*/
     Q.Sprite.extend("Ghost", {
         init: function(p) {
@@ -239,9 +239,38 @@ Quintus.AKSpritesEnemies = function(Q) {
     });
 
     /**===========================================================================================
-     * 
+     *
+     *                                          BOSS
+     *
+     ===========================================================================================*/
+    Q.Sprite.extend("Boss", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'gooseka',
+                sprite: 'BossAnimation',
+                scale: 0.9,
+                muerto: false,
+                llamado: false
+            });
+            /*this.add("2d, animation, aiBounce, defaultEnemy");
+            this.play("move_right");
+            this.on("bump.left", function(collision) {
+                this.play("move_right");
+            });
+            this.on("bump.right", function(collision) {
+                this.play("move_left");
+            });
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist")) this.destroy();
+            });*/
+
+        }
+    });
+
+    /**===========================================================================================
+     *
      *                                    DEFAULT ENEMIES
-     * 
+     *
      ============================================================================================*/
     Q.component("defaultEnemy", {
         added: function() {

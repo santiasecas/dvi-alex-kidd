@@ -208,10 +208,11 @@ Quintus.AKSpritesObjects = function(Q) {
                 sensor: true
             });
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex")) {
+                /*if (collision.obj.isA("Alex")) {
+                    this.del('platformerControls');
                     Q.clearStages();
                     Q.stageScene("creditos");
-                }
+                }*/
             });
         }
     });

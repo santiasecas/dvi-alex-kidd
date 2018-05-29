@@ -32,6 +32,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                     if (Q.stages[0].lists["AlexFist"] !== undefined) {
                         Q.stages[0].lists["AlexFist"][0].destroy();
                     }
+                }else if(collision.obj.isA("Rice")){
+                  this.p.boss = true;
+                  console.log("arroz");
+                  console.log(this.p.boss);
                 }
             });
         },
@@ -45,6 +49,20 @@ Quintus.AKSpritesPlayer = function(Q) {
                 Q.stageScene("die");
             }
             if (!this.p.muerto) {
+              if (this.p.boss) {
+                Q.stages[0].unfollow();
+                this.del('platformerControls');
+                this.p.vx = 0;
+                console.log(this.p.vx);
+                this.p.gravity = 0;
+                console.log(this.p.gravity);
+                this.p.collisionMask = '';
+                this.p.sensor = true;
+                this.play("stand_" + 'right');
+                this.p.x = 160;
+                console.log(this.p.x);
+                this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+              }else{
                 //GOLPEAR
                 if (Q.inputs['fire'] && this.p.punching == 0) {
                     fist = Q.stage().insert(new Q.AlexFist());
@@ -70,7 +88,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                         if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
                     }
                 }
-            } else {
+              }
+            }
+
+            else {
                 if (!this.p.llamado) {
                     Q.stages[0].unfollow();
                     this.del('platformerControls');
