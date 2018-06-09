@@ -255,6 +255,32 @@ Quintus.AKSpritesEnemies = function(Q) {
         }
     });
 
+    Q.Sprite.extend("BossFinalGame", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'final-game',
+                sprite: 'final-game',
+                gravity: 0,
+                frame: 0,
+                duration: 3,
+                count: 0,
+                end: 5,
+            });
+            this.add('2d, platformerControls, animation, tween');
+        },
+        step: function(dt) {
+          if (true) {
+              this.p.y = alex.p.y - 100;
+              this.p.x = alex.p.x + 200;
+          }
+          this.p.count += dt;
+          if(this.p.count > this.p.duration){
+            Q.clearStages();
+            Q.stageScene("creditos");
+          }
+        }
+    });
+
     /**===========================================================================================
      *
      *                                    DEFAULT ENEMIES

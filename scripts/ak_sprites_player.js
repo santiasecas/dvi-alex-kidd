@@ -238,8 +238,9 @@ Quintus.AKSpritesPlayer = function(Q) {
                 gravity: 0,
                 count: 0,
                 frame: 0,
-                duration: 1,
+                duration: 7.5,
                 sound: 0,
+                enemyHand: 0,
             });
             this.add('2d, platformerControls, animation, tween');
             //this.play("movement");
@@ -251,24 +252,29 @@ Quintus.AKSpritesPlayer = function(Q) {
               this.p.y = alex.p.y - 100;
               this.p.x = alex.p.x - 5;
           }
+
+          if(this.p.sound == 0){
+            Q.audio.play("rock_paper_scissors.ogg");
+            this.p.sound = 1;
+          }
+
           this.p.count += dt;
           if (this.p.count > this.p.duration) {
-            if(this.p.sound == 0){
-              Q.audio.play("boss_speak.ogg");
-              this.p.sound = 1;
-            }
+            this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
+          }
+
+          else {
             if(Q.inputs['fire'] && this.p.frame == 0){
               this.p.frame = 1;
-              sleep(500);
-              /*Q.clearStages();
-              Q.stageScene("creditos");*/
+              sleep(1000);
             } else if (Q.inputs['fire'] && this.p.frame == 1){
               this.p.frame = 2;
-              sleep(500);
+              sleep(1000);
             } else if(Q.inputs['fire'] && this.p.frame == 2){
               this.p.frame = 0;
-              sleep(500);
             }
+
+            this.p.enemyHand = Math.floor((Math.random() * 3));
           }
         }
     });
