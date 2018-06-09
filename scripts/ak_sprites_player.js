@@ -23,6 +23,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                 paralizado: false,
                 contParalisis: 0,
                 izquierda: true,
+                final: 0,
             });
             this.add('2d, platformerControls, animation, tween');
             this.on('noPunch', function() {
@@ -77,16 +78,19 @@ Quintus.AKSpritesPlayer = function(Q) {
                     this.play("stand_" + 'right');
                     this.p.x = 160;
                     this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
-                    tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200 }));
-                    //console.log(tfinal.p.count);
-                    if (Q.inputs['fire'] && tfinal.p.count == 0) {
-                        tfinal.p.count = 1;
-                        console.log(tfinal.p.count);
-                        tfinal.p.frame = 1;
-                    } else if (Q.inputs['fire'] && tfinal.p.count == 1) {
-                        console.log("dentro");
-                        glob = this.stage().insert(new Q.AlexFinalGame());
-                        tfinal.p.count == 2;
+                    if (!Q.inputs['fire'] && this.p.final == 0) {
+                      tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
+                      this.p.final = 1;
+                      sleep(500);
+                    } else if(Q.inputs['fire'] && this.p.final == 1) {
+                      tfinal.destroy();
+                      tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 1 }));
+                      this.p.final = 2;
+                      sleep(500);
+                    } else if (Q.inputs['fire'] && this.p.final == 2) {
+                      tfinal.destroy();
+                      this.p.final = 3;
+                      glob = this.stage.insert(new Q.AlexFinalGame());
                     }
                 } else {
                     //GOLPEAR
@@ -230,31 +234,41 @@ Quintus.AKSpritesPlayer = function(Q) {
                 sheet: 'final-game',
                 sprite: 'final-game',
                 gravity: 0,
-                count: 0
+                count: 0,
+                frame: 0,
+                duration: 1,
             });
-            this.add("animation");
+            this.add('2d, platformerControls, animation');
             this.play("movement");
-            /*this.on("hit.sprite", function(collision) {
-				if (!collision.obj.isA("Alex")) {
-					this.destroy();
-				}
-            });*/
         },
         step: function(dt) {
-            if (true) {
-                alex = Q.stage().lists.Alex[0];
-                this.p.y = alex.p.y - 100;
-                this.p.x = alex.p.x - 5;
+          this.add('platformerControls');
+          if (true) {
+              alex = Q.stage().lists.Alex[0];
+              this.p.y = alex.p.y - 100;
+              this.p.x = alex.p.x - 5;
+          }
+          this.p.count += dt;
+          if (this.p.count > this.p.duration) {
+            if(Q.inputs['fire']){
+              Q.clearStages();
+              Q.stageScene("creditos");
             }
-            this.p.count += dt;
-            if (this.p.count > this.p.duration) {
-                this.destroy();
-            }
+          }
         }
     });
 
     Q.animations('final-game', {
-        movement: { frames: [0, 1, 2], rate: 1 / 30 }
+        movement: { frames: [0, 1, 2], rate: 1 / 3, loop: true }
     });
 
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }

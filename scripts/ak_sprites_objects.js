@@ -377,11 +377,5 @@ Quintus.AKSpritesObjects = function(Q) {
                     frame: 0
                 });
             }
-            /*this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("AlexFist") && !this.p.broken) {
-                    this.p.broken = true;
-                    Q.audio.play("break_box.ogg");
-                }
-            });*/
     });
 }
