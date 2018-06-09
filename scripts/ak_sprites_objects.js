@@ -41,8 +41,7 @@ Quintus.AKSpritesObjects = function(Q) {
 
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
-                    //var numero = Math.floor((Math.random() * 1) + 1);
-                    var numero = 2;
+                    var numero = Math.floor((Math.random() * 3) + 1);
 
                     if (numero === 1) {
                         this.p.drop = "anillo";
@@ -52,7 +51,8 @@ Quintus.AKSpritesObjects = function(Q) {
                         this.drop(0);
 
                     } else if (numero === 3) {
-
+                        this.p.drop = "vida";
+                        this.drop();
                     }
                     Q.audio.play("star_box.ogg");
                     this.destroy();
@@ -188,7 +188,7 @@ Quintus.AKSpritesObjects = function(Q) {
                     this.p.dropped = true;
                     console.log("Vamos a generar un " + this.p.drop);
                     if (this.p.drop === 'anillo') this.stage.insert(new Q.Ring({ x: this.p.x, y: this.p.y }));
-                    //if (this.p.drop === 'vida') this.stage.insert(new Q.Ring({ x: this.p.x, y: this.p.y }));
+                    if (this.p.drop === 'vida') this.stage.insert(new Q.Vida({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'ghost') this.stage.insert(new Q.Ghost({ x: this.p.x, y: this.p.y + offsetY }));
@@ -330,6 +330,26 @@ Quintus.AKSpritesObjects = function(Q) {
                     this.p.taken = true;
                     Q.audio.play("coin.ogg");
                     Q.state.inc("rings", 1);
+                    this.destroy();
+                };
+            });
+        }
+    });
+
+    Q.Sprite.extend("Vida", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'vidaAlex',
+                sensor: true,
+                gravity: 0,
+                taken: false
+            });
+            this.add("2d");
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("Alex") || collision.obj.isA("AlexFist") && !this.p.taken) {
+                    this.p.taken = true;
+                    Q.audio.play("coin.ogg");
+                    Q.state.inc("lives", 1);
                     this.destroy();
                 };
             });
