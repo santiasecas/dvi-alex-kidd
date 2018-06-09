@@ -27,9 +27,11 @@ Quintus.AKScenes = function(Q) {
         //stage.insert(new Q.Mountain({ x: 416, y: 3408 }));
         //stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
         //stage.insert(new Q.Frog({ x: 150, y: 200 }));
-        stage.insert(new Q.Question({ x: 464, y: 431, drop: 'ghost' }));
-        stage.insert(new Q.Question({ x: 368, y: 1072, drop: 'ghost' }));
+        stage.insert(new Q.Question({ x: 464, y: 431 }));
+        stage.insert(new Q.Question({ x: 368, y: 1072 }));
         stage.insert(new Q.GhostBlock({ x: 240, y: 1616, drop: 'ghost' }));
+
+        stage.insert(new Q.YellowSkull({ x: 48, y: 1328 }));
         //stage.insert(new Q.StarBlock({ x: 232, y: 200, drop: 'sackLittle' }));
         //stage.insert(new Q.Rock({ x: 264, y: 200 }));
         //stage.insert(new Q.Ghost({ x: 160, y: 200 }));

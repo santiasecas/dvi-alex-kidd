@@ -19,7 +19,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                 scale: 0.9,
                 punching: 0,
                 muerto: false,
-                llamado: false
+                llamado: false,
+                paralizado: false,
+                contParalisis: 0,
+                izquierda: true,
             });
             this.add('2d, platformerControls, animation, tween');
             this.on('noPunch', function() {
@@ -32,12 +35,28 @@ Quintus.AKSpritesPlayer = function(Q) {
                     if (Q.stages[0].lists["AlexFist"] !== undefined) {
                         Q.stages[0].lists["AlexFist"][0].destroy();
                     }
-                }else if(collision.obj.isA("Rice")){
-                  this.p.boss = true;
+                } else if (collision.obj.isA("Rice")) {
+                    this.p.boss = true;
                 }
             });
         },
         step: function(dt) {
+            if (this.p.paralizado) {
+                if (this.p.izquierda) {
+                    this.p.x += 1;
+                    this.p.izquierda = false;
+                } else {
+                    this.p.x += -1;
+                    this.p.izquierda = true;
+                }
+                this.del('platformerControls');
+                this.p.contParalisis += dt;
+                if (this.p.contParalisis > 2) {
+                    this.add('platformerControls');
+                    this.p.paralizado = false;
+                    this.p.contParalisis = 0;
+                }
+            }
 
             if (this.p.y > 3340) {
                 Q.stages[0].unfollow();
@@ -47,58 +66,56 @@ Quintus.AKSpritesPlayer = function(Q) {
                 Q.stageScene("die");
             }
             if (!this.p.muerto) {
-              // Apartado del BOSS
-              if (this.p.boss) {
-                Q.stages[0].unfollow();
-                this.del('platformerControls');
-                this.p.vx = 0;
-                this.p.gravity = 0;
-                this.p.collisionMask = '';
-                this.p.sensor = true;
-                this.play("stand_" + 'right');
-                this.p.x = 160;
-                this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
-                tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200}));
-                //console.log(tfinal.p.count);
-                if (Q.inputs['fire'] && tfinal.p.count == 0){
-                  tfinal.p.count = 1;
-                  console.log(tfinal.p.count);
-                  tfinal.p.frame = 1;
-                } else if (Q.inputs['fire'] && tfinal.p.count == 1){
-                  console.log("dentro");
-                  glob = this.stage().insert(new Q.AlexFinalGame());
-                  tfinal.p.count == 2;
-                }
-              }else{
-                //GOLPEAR
-                if (Q.inputs['fire'] && this.p.punching == 0) {
-                    fist = Q.stage().insert(new Q.AlexFist());
-                    this.p.punching = 1;
-                    Q.audio.play("punch.ogg");
-                    this.play("punch");
-                    this.p.punching = 2;
+                // Apartado del BOSS
+                if (this.p.boss) {
+                    Q.stages[0].unfollow();
+                    this.del('platformerControls');
+                    this.p.vx = 0;
+                    this.p.gravity = 0;
+                    this.p.collisionMask = '';
+                    this.p.sensor = true;
+                    this.play("stand_" + 'right');
+                    this.p.x = 160;
+                    this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                    tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200 }));
+                    //console.log(tfinal.p.count);
+                    if (Q.inputs['fire'] && tfinal.p.count == 0) {
+                        tfinal.p.count = 1;
+                        console.log(tfinal.p.count);
+                        tfinal.p.frame = 1;
+                    } else if (Q.inputs['fire'] && tfinal.p.count == 1) {
+                        console.log("dentro");
+                        glob = this.stage().insert(new Q.AlexFinalGame());
+                        tfinal.p.count == 2;
+                    }
                 } else {
-                    if (!Q.inputs['fire'] && this.p.punching == 2) {
-                        this.p.punching = 0;
-                        fist.destroy();
-                    }
-                    //MOVIMIENTOS
-                    if (Q.inputs['up'] && !this.p.jumping) {
-                        Q.audio.play("jump.ogg");
-                    } else if (Q.inputs['down']) this.play("crouch_" + this.p.direction);
-                    else if (this.p.jumping && this.p.landed < 0) {
-                        this.play("jump_" + this.p.direction);
-                    } else if (this.p.vx < 0 || this.p.vx > 0) {
-                        this.play("run_" + this.p.direction);
+                    //GOLPEAR
+                    if (Q.inputs['fire'] && this.p.punching == 0) {
+                        fist = Q.stage().insert(new Q.AlexFist());
+                        this.p.punching = 1;
+                        Q.audio.play("punch.ogg");
+                        this.play("punch");
+                        this.p.punching = 2;
                     } else {
-                        if (this.p.vy != 0) this.play("jump_" + this.p.direction);
-                        if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
+                        if (!Q.inputs['fire'] && this.p.punching == 2) {
+                            this.p.punching = 0;
+                            fist.destroy();
+                        }
+                        //MOVIMIENTOS
+                        if (Q.inputs['up'] && !this.p.jumping) {
+                            Q.audio.play("jump.ogg");
+                        } else if (Q.inputs['down']) this.play("crouch_" + this.p.direction);
+                        else if (this.p.jumping && this.p.landed < 0) {
+                            this.play("jump_" + this.p.direction);
+                        } else if (this.p.vx < 0 || this.p.vx > 0) {
+                            this.play("run_" + this.p.direction);
+                        } else {
+                            if (this.p.vy != 0) this.play("jump_" + this.p.direction);
+                            if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
+                        }
                     }
                 }
-              }
-            }
-
-            else {
+            } else {
                 if (!this.p.llamado) {
                     Q.stages[0].unfollow();
                     this.del('platformerControls');
@@ -122,6 +139,10 @@ Quintus.AKSpritesPlayer = function(Q) {
             this.play("dying");
             Q.state.dec("lives", 1);
             this.p.vy = -65;
+        },
+
+        paralisis: function() {
+            this.p.paralizado = true;
         }
 
     });
@@ -155,9 +176,9 @@ Quintus.AKSpritesPlayer = function(Q) {
                 this.destroy();
             });
             this.on("hit.sprite", function(collision) {
-      				if (!collision.obj.isA("Alex")) {
-      					this.destroy();
-      				}
+                if (!collision.obj.isA("Alex")) {
+                    this.destroy();
+                }
             });
         },
         step: function(dt) {
@@ -233,7 +254,7 @@ Quintus.AKSpritesPlayer = function(Q) {
     });
 
     Q.animations('final-game', {
-        movement: { frames: [0,1,2], rate: 1/30 }
+        movement: { frames: [0, 1, 2], rate: 1 / 30 }
     });
 
 }

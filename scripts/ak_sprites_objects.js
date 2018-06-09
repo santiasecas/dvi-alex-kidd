@@ -7,19 +7,53 @@
  */
 
 Quintus.AKSpritesObjects = function(Q) {
+    Q.Sprite.extend("YellowSkull", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+                frame: 10,
+                gravity: 0,
+            });
+            this.add("2d, drops, brokeBox");
+
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist")) {
+                    Q.audio.play("star_box.ogg");
+                    Q.stages[0].lists["Alex"][0].paralisis();
+                    this.destroy();
+                }
+            });
+        }
+    });
+
+
+
     Q.Sprite.extend("Question", {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
                 frame: 9,
                 gravity: 0,
-                dropped: false
+                dropped: false,
+                drop: ""
             });
             this.add("2d, drops, brokeBox");
 
             this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist")) {
-                    this.drop(0);
+                    //var numero = Math.floor((Math.random() * 1) + 1);
+                    var numero = 2;
+
+                    if (numero === 1) {
+                        this.p.drop = "anillo";
+                        this.drop();
+                    } else if (numero === 2) {
+                        this.p.drop = "ghost";
+                        this.drop(0);
+
+                    } else if (numero === 3) {
+
+                    }
                     Q.audio.play("star_box.ogg");
                     this.destroy();
                 }
@@ -152,6 +186,9 @@ Quintus.AKSpritesObjects = function(Q) {
             drop: function(offsetY) {
                 if (!this.p.dropped) {
                     this.p.dropped = true;
+                    console.log("Vamos a generar un " + this.p.drop);
+                    if (this.p.drop === 'anillo') this.stage.insert(new Q.Ring({ x: this.p.x, y: this.p.y }));
+                    //if (this.p.drop === 'vida') this.stage.insert(new Q.Ring({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'sackLittle') this.stage.insert(new Q.SackLittle({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'sackBig') this.stage.insert(new Q.SackBig({ x: this.p.x, y: this.p.y }));
                     if (this.p.drop === 'ghost') this.stage.insert(new Q.Ghost({ x: this.p.x, y: this.p.y + offsetY }));
@@ -282,7 +319,19 @@ Quintus.AKSpritesObjects = function(Q) {
         init: function(p) {
             this._super(p, {
                 sheet: 'escenary',
-                frame: 13
+                frame: 13,
+                sensor: true,
+                gravity: 0,
+                taken: false
+            });
+            this.add("2d");
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("Alex") && !this.p.taken) {
+                    this.p.taken = true;
+                    Q.audio.play("coin.ogg");
+                    Q.state.inc("rings", 1);
+                    this.destroy();
+                };
             });
         }
     });
@@ -299,15 +348,15 @@ Quintus.AKSpritesObjects = function(Q) {
     });
 
     Q.Sprite.extend("TitleFinalGame", {
-      init: function(p) {
-          this._super(p, {
-              sheet: 'final-game-titles',
-              sprite: 'TitleFinalGameAnimation',
-              scale: 3.0,
-              count: 0,
-              frame: 0
-          });
-      }
+        init: function(p) {
+                this._super(p, {
+                    sheet: 'final-game-titles',
+                    sprite: 'TitleFinalGameAnimation',
+                    scale: 3.0,
+                    count: 0,
+                    frame: 0
+                });
+            }
             /*this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist") && !this.p.broken) {
                     this.p.broken = true;
