@@ -79,14 +79,16 @@ Quintus.AKSpritesPlayer = function(Q) {
                     this.p.x = 160;
                     this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
                     if (!Q.inputs['fire'] && this.p.final == 0) {
+                      Q.audio.play("boss_speak.ogg");
                       tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
                       this.p.final = 1;
-                      sleep(500);
+                      sleep(2000);
                     } else if(Q.inputs['fire'] && this.p.final == 1) {
+                      Q.audio.play("boss_speak.ogg");
                       tfinal.destroy();
                       tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 1 }));
                       this.p.final = 2;
-                      sleep(500);
+                      sleep(2000);
                     } else if (Q.inputs['fire'] && this.p.final == 2) {
                       tfinal.destroy();
                       this.p.final = 3;
@@ -237,9 +239,10 @@ Quintus.AKSpritesPlayer = function(Q) {
                 count: 0,
                 frame: 0,
                 duration: 1,
+                sound: 0,
             });
-            this.add('2d, platformerControls, animation');
-            this.play("movement");
+            this.add('2d, platformerControls, animation, tween');
+            //this.play("movement");
         },
         step: function(dt) {
           this.add('platformerControls');
@@ -250,9 +253,21 @@ Quintus.AKSpritesPlayer = function(Q) {
           }
           this.p.count += dt;
           if (this.p.count > this.p.duration) {
-            if(Q.inputs['fire']){
-              Q.clearStages();
-              Q.stageScene("creditos");
+            if(this.p.sound == 0){
+              Q.audio.play("boss_speak.ogg");
+              this.p.sound = 1;
+            }
+            if(Q.inputs['fire'] && this.p.frame == 0){
+              this.p.frame = 1;
+              sleep(500);
+              /*Q.clearStages();
+              Q.stageScene("creditos");*/
+            } else if (Q.inputs['fire'] && this.p.frame == 1){
+              this.p.frame = 2;
+              sleep(500);
+            } else if(Q.inputs['fire'] && this.p.frame == 2){
+              this.p.frame = 0;
+              sleep(500);
             }
           }
         }
