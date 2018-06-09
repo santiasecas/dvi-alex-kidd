@@ -371,6 +371,14 @@ Quintus.AKScenes = function(Q) {
      ****************   HUD   *****************
      ******************************************
      */
+
+    function vidas() {
+        var vidas = Q.state.p.lives.toString();
+        while (vidas.length < 2) {
+            vidas = '0' + vidas;
+        }
+        return vidas;
+    }
     //MARCADOR DE VIDAS
     Q.scene('lives', function(stage) {
         var lives = stage.insert(new Q.AlexHud({
@@ -378,10 +386,6 @@ Quintus.AKScenes = function(Q) {
             y: 25,
             scale: 0.7
         }));
-        var vidas = Q.state.p.lives.toString();
-        while (vidas.length < 2) {
-            vidas = '0' + vidas;
-        }
         var lives2 = stage.insert(new Q.UI.Text({
             x: 70,
             y: 25,
@@ -389,10 +393,10 @@ Quintus.AKScenes = function(Q) {
             align: 'left',
             color: '#fff',
             family: 'Alex Kidd in Miracle World',
-            label: vidas
+            label: vidas()
         }));
         Q.state.on("change.lives", this, function(lives) {
-            lives2.p.label = vidas;
+            lives2.p.label = vidas();
         });
     });
 
@@ -424,6 +428,14 @@ Quintus.AKScenes = function(Q) {
         });
     });
 
+    function anillos() {
+        var anillos = Q.state.p.rings.toString();
+        while (anillos.length < 2) {
+            anillos = '0' + anillos;
+        }
+        return anillos;
+    }
+
     //MARCADOR DE ANILLOS
     Q.scene('rings', function(stage) {
         var rings = stage.insert(new Q.Ring({
@@ -431,10 +443,7 @@ Quintus.AKScenes = function(Q) {
             y: 25,
             scale: 0.85
         }));
-        var anillos = Q.state.p.rings.toString();
-        while (anillos.length < 2) {
-            anillos = '0' + anillos;
-        }
+
         var rings2 = stage.insert(new Q.UI.Text({
             x: 420,
             y: 25,
@@ -442,10 +451,10 @@ Quintus.AKScenes = function(Q) {
             align: 'left',
             color: '#fff',
             family: 'Alex Kidd in Miracle World',
-            label: anillos
+            label: anillos()
         }));
         Q.state.on("change.rings", this, function(rings) {
-            rings2.p.label = '\n x ' + rings;
+            rings2.p.label = anillos();
         });
     });
 

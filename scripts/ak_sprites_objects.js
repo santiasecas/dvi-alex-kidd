@@ -346,7 +346,7 @@ Quintus.AKSpritesObjects = function(Q) {
             });
             this.add("2d");
             this.on("hit.sprite", function(collision) {
-                if (collision.obj.isA("Alex") || collision.obj.isA("AlexFist") && !this.p.taken) {
+                if (collision.obj.isA("Alex") && !this.p.taken) {
                     this.p.taken = true;
                     Q.audio.play("coin.ogg");
                     Q.state.inc("lives", 1);
