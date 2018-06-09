@@ -33,6 +33,7 @@ window.addEventListener("load", function() {
         "final-game.png", "final-game-titles.png"
     ], function() {
         Q.sheet("alex", "alex.png", { tilew: 32, tileh: 48 });
+        Q.sheet("vidaAlex", "alexhud.png", { tilew: 32, tileh: 32 });
         Q.sheet("gooseka", "gooseka.png", { tilew: 23, tileh: 48 });
         Q.sheet("final-game", "final-game.png", { tilew: 68, tileh: 64 });
         Q.sheet("final-game-titles", "final-game-titles.png", { tilew: 137, tileh: 36 });
