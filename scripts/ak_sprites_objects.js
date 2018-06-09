@@ -7,6 +7,27 @@
  */
 
 Quintus.AKSpritesObjects = function(Q) {
+    Q.Sprite.extend("YellowSkull", {
+        init: function(p) {
+            this._super(p, {
+                sheet: 'escenary',
+                frame: 10,
+                gravity: 0,
+            });
+            this.add("2d, drops, brokeBox");
+
+            this.on("hit.sprite", function(collision) {
+                if (collision.obj.isA("AlexFist")) {
+                    Q.audio.play("star_box.ogg");
+                    Q.stages[0].lists["Alex"][0].paralisis();
+                    this.destroy();
+                }
+            });
+        }
+    });
+
+
+
     Q.Sprite.extend("Question", {
         init: function(p) {
             this._super(p, {
@@ -299,15 +320,15 @@ Quintus.AKSpritesObjects = function(Q) {
     });
 
     Q.Sprite.extend("TitleFinalGame", {
-      init: function(p) {
-          this._super(p, {
-              sheet: 'final-game-titles',
-              sprite: 'TitleFinalGameAnimation',
-              scale: 3.0,
-              count: 0,
-              frame: 0
-          });
-      }
+        init: function(p) {
+                this._super(p, {
+                    sheet: 'final-game-titles',
+                    sprite: 'TitleFinalGameAnimation',
+                    scale: 3.0,
+                    count: 0,
+                    frame: 0
+                });
+            }
             /*this.on("hit.sprite", function(collision) {
                 if (collision.obj.isA("AlexFist") && !this.p.broken) {
                     this.p.broken = true;
