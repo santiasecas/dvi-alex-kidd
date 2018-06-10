@@ -47,13 +47,6 @@ window.addEventListener("load", function() {
         Q.sheet("ghost", "ghost.png", { tilew: 32, tileh: 32 });
         Q.sheet("enemyDie", "enemyDie.png", { tilew: 32, tileh: 32 });
         Q.sheet("logo", "logo.png", { tilew: 800, tileh: 600 });
-        Q.loadTMX("level1.tmx", function() {
-            Q.stageScene("level1");
-            Q.state.reset({ lives: 3, coins: 0, rings: 0 });
-            Q.stageScene("hud", 2);
-            Q.stageScene("lives", 3);
-            Q.stageScene("coins", 4);
-            Q.stageScene("rings", 5);
-        });
+        Q.stageScene("menu");
     });
 });

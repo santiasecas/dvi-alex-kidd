@@ -276,58 +276,59 @@ Quintus.AKSpritesEnemies = function(Q) {
             this.add('2d, platformerControls, animation, tween');
         },
         step: function(dt) {
-          if (true) {
-              this.p.y = alex.p.y - 100;
-              this.p.x = alex.p.x + 200;
-          }
-          this.p.count += dt;
-          if(this.p.count > this.p.duration){
-            // JUEGO PIEDRA, PAPEL o TIJERAS
-            console.log("Alex usa: " + alexHand.p.frame);
-            console.log("Enemigo usa: " + this.p.frame);
-            if(alexHand.p.frame == this.p.frame){
-              console.log("empata");
-              this.destroy();
-              // De momento al empatar se pierde
-              Q.clearStages();
-              Q.stageScene("endGame");
-
-              //alexHand = this.stage.insert(new Q.AlexFinalGame());
-              //alexHand.destroy();
-            }else if(alexHand.p.frame == 0 && this.p.frame == 1){
-              console.log("gana");
-              alex.p.boss = false;
-              this.p.gana = true;
-            }else if(alexHand.p.frame == 2 && this.p.frame == 0){
-              console.log("gana");
-              alex.p.boss = false;
-              this.p.gana = true;
-            }else if(alexHand.p.frame == 1 && this.p.frame == 2){
-              console.log("gana");
-              alex.p.boss = false;
-              this.p.gana = true;
-            }else{
-              sleep(2000);
-              console.log("pierde");
-              Q.clearStages();
-              Q.stageScene("endGame");
+            if (true) {
+                this.p.y = alex.p.y - 100;
+                this.p.x = alex.p.x + 200;
             }
+            this.p.count += dt;
+            if (this.p.count > this.p.duration) {
+                // JUEGO PIEDRA, PAPEL o TIJERAS
+                console.log("Alex usa: " + alexHand.p.frame);
+                console.log("Enemigo usa: " + this.p.frame);
+                if (alexHand.p.frame == this.p.frame) {
+                    console.log("empata");
+                    this.destroy();
+                    // De momento al empatar se pierde
+                    Q.clearStages();
+                    Q.stageScene("endGame");
 
-            if(this.p.gana == true){
-              this.destroy();
-              setTimeout( function(){ Q.clearStages(); Q.stageScene("creditos"); }, 3000);
+                    //alexHand = this.stage.insert(new Q.AlexFinalGame());
+                    //alexHand.destroy();
+                } else if (alexHand.p.frame == 0 && this.p.frame == 1) {
+                    console.log("gana");
+                    alex.p.boss = false;
+                    this.p.gana = true;
+                } else if (alexHand.p.frame == 2 && this.p.frame == 0) {
+                    console.log("gana");
+                    alex.p.boss = false;
+                    this.p.gana = true;
+                } else if (alexHand.p.frame == 1 && this.p.frame == 2) {
+                    console.log("gana");
+                    alex.p.boss = false;
+                    this.p.gana = true;
+                } else {
+                    sleep(2000);
+                    console.log("pierde");
+                    Q.clearStages();
+                    Q.stageScene("endGame");
+                }
 
-              /* PENDIENTE: Ganar al tocar el arroz
-              //alexHand.destroy();
-              Q.clearStages();
-              Q.stageScene("level1");
-              alexHand.destroy();
-              alex.p.fin = true;
-              bossEnemy.destroy();
-              //this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));*/
-              //this.stage.insert(new Q.Rice({ x: bossEnemy.p.x - 50, y: bossEnemy.p.y }));
+                if (this.p.gana == true) {
+                    this.destroy();
+                    Q.clearStages();
+                    Q.stageScene("creditos");
+
+                    /* PENDIENTE: Ganar al tocar el arroz
+                    //alexHand.destroy();
+                    Q.clearStages();
+                    Q.stageScene("level1");
+                    alexHand.destroy();
+                    alex.p.fin = true;
+                    bossEnemy.destroy();
+                    //this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));*/
+                    //this.stage.insert(new Q.Rice({ x: bossEnemy.p.x - 50, y: bossEnemy.p.y }));
+                }
             }
-          }
         }
     });
 

@@ -19,22 +19,16 @@ Quintus.AKScenes = function(Q) {
     });
 
     Q.scene("level1", function(stage) {
-        //Q.audio.play('main_theme.ogg',{loop: true});
         Q.stageTMX('level1.tmx', stage);
         stage.insert(new Q.Mountain({ x: 128, y: 3408 }));
         stage.insert(new Q.Mountain({ x: 288, y: 3408 }));
         var alex = stage.insert(new Q.Alex({ x: 100, y: 200 }));
-        //stage.insert(new Q.Mountain({ x: 416, y: 3408 }));
-        //stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
-        //stage.insert(new Q.Frog({ x: 150, y: 200 }));
+        stage.insert(new Q.Scorpion({ x: 250, y: 500 }));
+        stage.insert(new Q.Frog({ x: 256, y: 288 }));
         stage.insert(new Q.Question({ x: 464, y: 431 }));
         stage.insert(new Q.Question({ x: 368, y: 1072 }));
         stage.insert(new Q.GhostBlock({ x: 240, y: 1616, drop: 'ghost' }));
-
         stage.insert(new Q.YellowSkull({ x: 48, y: 1328 }));
-        //stage.insert(new Q.StarBlock({ x: 232, y: 200, drop: 'sackLittle' }));
-        //stage.insert(new Q.Rock({ x: 264, y: 200 }));
-        //stage.insert(new Q.Ghost({ x: 160, y: 200 }));
 
         var birds = [
             [8, 19],
@@ -252,6 +246,7 @@ Quintus.AKScenes = function(Q) {
         },
         step: function(dt) {
             if (Q.inputs['action']) {
+                Q.state.reset({ lives: 3, coins: 0, rings: 0 });
                 startGame();
             }
         }
@@ -275,9 +270,8 @@ Quintus.AKScenes = function(Q) {
         step: function(dt) {
             this.p.cont += dt;
             if (this.p.cont > this.p.time) {
-                Q.state.reset({ lives: 3, coins: 0, rings: 0 });
                 Q.clearStages();
-                Q.stageScene("menu");;
+                Q.stageScene("menu");
             }
         }
     });
@@ -302,7 +296,6 @@ Quintus.AKScenes = function(Q) {
             size: 12,
             color: '#fff',
             family: 'Alex Kidd in Miracle World',
-            //label: ("SCORE: " + stage.options.score)
             label: ("SCORE: " + Q.state.p.coins.toString()),
         }));
 
@@ -465,12 +458,11 @@ Quintus.AKScenes = function(Q) {
             Q.audio.stop();
             Q.clearStages();
             Q.audio.stop();
-            //Q.audio.play("music_main.ogg", { loop: true });
+            Q.audio.play("main_theme.ogg", { loop: true });
             Q.stageScene("level1");
-            Q.stageScene("hud", 2);
-            Q.stageScene("lives", 3);
-            Q.stageScene("coins", 4);
-            Q.stageScene("rings", 5);
+            Q.stageScene("lives", 2);
+            Q.stageScene("coins", 3);
+            Q.stageScene("rings", 4);
         });
     }
 };

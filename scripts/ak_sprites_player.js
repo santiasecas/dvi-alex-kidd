@@ -36,7 +36,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                     if (Q.stages[0].lists["AlexFist"] !== undefined) {
                         Q.stages[0].lists["AlexFist"][0].destroy();
                     }
-                //} else if (collision.obj.isA("Rice")) {
+                    //} else if (collision.obj.isA("Rice")) {
                 } else if (this.p.y == 3434.4) {
                     this.p.boss = true;
                 }
@@ -70,6 +70,7 @@ Quintus.AKSpritesPlayer = function(Q) {
             if (!this.p.muerto) {
                 // Apartado del BOSS
                 if (this.p.boss) {
+                    Q.audio.stop();
                     Q.stages[0].unfollow();
                     this.del('platformerControls');
                     this.p.vx = 0;
@@ -81,23 +82,23 @@ Quintus.AKSpritesPlayer = function(Q) {
                     bossEnemy = this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y - 8 }));
                     //console.log("Altura enemigo: " + this.p.y);
                     if (!Q.inputs['fire'] && this.p.final == 0) {
-                      Q.audio.play("boss_speak.ogg");
-                      tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
-                      this.p.final = 1;
-                      sleep(2000);
-                    } else if(Q.inputs['fire'] && this.p.final == 1) {
-                      Q.audio.play("boss_speak.ogg");
-                      tfinal.destroy();
-                      tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 1 }));
-                      this.p.final = 2;
-                      sleep(2000);
+                        Q.audio.play("boss_speak.ogg");
+                        tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
+                        this.p.final = 1;
+                        sleep(2000);
+                    } else if (Q.inputs['fire'] && this.p.final == 1) {
+                        Q.audio.play("boss_speak.ogg");
+                        tfinal.destroy();
+                        tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 1 }));
+                        this.p.final = 2;
+                        sleep(2000);
                     } else if (Q.inputs['fire'] && this.p.final == 2) {
-                      tfinal.destroy();
-                      this.p.final = 3;
-                      alexHand = this.stage.insert(new Q.AlexFinalGame());
+                        tfinal.destroy();
+                        this.p.final = 3;
+                        alexHand = this.stage.insert(new Q.AlexFinalGame());
                     }
                 } else {
-                    if (!Q.inputs['down']) {//GOLPEAR
+                    if (!Q.inputs['down']) { //GOLPEAR
                         this.add('platformerControls');
                         if (Q.inputs['fire'] && this.p.punching == 0) {
                             fist = Q.stage().insert(new Q.AlexFist());
@@ -113,8 +114,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                             //MOVIMIENTOS
                             if (Q.inputs['up'] && !this.p.jumping) {
                                 Q.audio.play("jump.ogg");
-                            }
-                            else if (this.p.jumping && this.p.landed < 0) {
+                            } else if (this.p.jumping && this.p.landed < 0) {
                                 this.play("jump_" + this.p.direction);
                             } else if (this.p.vx < 0 || this.p.vx > 0) {
                                 this.play("run_" + this.p.direction);
@@ -123,10 +123,9 @@ Quintus.AKSpritesPlayer = function(Q) {
                                 if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
                             }
                         }
-                    }
-                    else if (Q.inputs['down'])  {
+                    } else if (Q.inputs['down']) {
                         this.del('platformerControls');
-                        this.p.vx=0;
+                        this.p.vx = 0;
                         this.play("crouch_" + this.p.direction);
                     }
                 }
@@ -150,6 +149,7 @@ Quintus.AKSpritesPlayer = function(Q) {
         },
 
         die: function() {
+            Q.audio.stop();
             Q.audio.play("die_alex.ogg");
             this.play("dying");
             Q.state.dec("lives", 1);
@@ -255,36 +255,34 @@ Quintus.AKSpritesPlayer = function(Q) {
             //this.play("movement");
         },
         step: function(dt) {
-          this.add('platformerControls');
-          if (true) {
-              alex = Q.stage().lists.Alex[0];
-              this.p.y = alex.p.y - 100;
-              this.p.x = alex.p.x - 5;
-          }
-
-          if(this.p.sound == 0){
-            Q.audio.play("rock_paper_scissors.ogg");
-            this.p.sound = 1;
-          }
-
-          this.p.count += dt;
-          if (this.p.count > this.p.duration) {
-            enemyHand = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
-          }
-
-          else {
-            alex.p.punching = 2;
-            if(Q.inputs['fire'] && this.p.frame == 0){
-              this.p.frame = 1;
-            } else if (Q.inputs['fire'] && this.p.frame == 1){
-              this.p.frame = 2;
-            } else if(Q.inputs['fire'] && this.p.frame == 2){
-              this.p.frame = 0;
+            this.add('platformerControls');
+            if (true) {
+                alex = Q.stage().lists.Alex[0];
+                this.p.y = alex.p.y - 100;
+                this.p.x = alex.p.x - 5;
             }
 
-            this.p.enemyHand = Math.floor((Math.random() * 3));
-            alex.p.boss = false;
-          }
+            if (this.p.sound == 0) {
+                Q.audio.play("rock_paper_scissors.ogg");
+                this.p.sound = 1;
+            }
+
+            this.p.count += dt;
+            if (this.p.count > this.p.duration) {
+                enemyHand = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
+            } else {
+                alex.p.punching = 2;
+                if (Q.inputs['fire'] && this.p.frame == 0) {
+                    this.p.frame = 1;
+                } else if (Q.inputs['fire'] && this.p.frame == 1) {
+                    this.p.frame = 2;
+                } else if (Q.inputs['fire'] && this.p.frame == 2) {
+                    this.p.frame = 0;
+                }
+
+                this.p.enemyHand = Math.floor((Math.random() * 3));
+                alex.p.boss = false;
+            }
         }
     });
 
@@ -295,10 +293,10 @@ Quintus.AKSpritesPlayer = function(Q) {
 }
 
 function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
     }
-  }
 }
