@@ -24,7 +24,6 @@ Quintus.AKSpritesPlayer = function(Q) {
                 contParalisis: 0,
                 izquierda: true,
                 final: 0,
-                fin: false
             });
             this.add('2d, platformerControls, animation, tween');
             this.on('noPunch', function() {
@@ -69,8 +68,8 @@ Quintus.AKSpritesPlayer = function(Q) {
                 Q.stageScene("die");
             }
             if (!this.p.muerto) {
-                // APARTADO DEL BOSS
-                if (this.p.boss && !this.p.fin) {
+                // Apartado del BOSS
+                if (this.p.boss) {
                     Q.stages[0].unfollow();
                     this.del('platformerControls');
                     this.p.vx = 0;
@@ -80,6 +79,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                     this.play("stand_" + 'right');
                     this.p.x = 160;
                     bossEnemy = this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                    //console.log("Altura enemigo: " + this.p.y);
                     if (!Q.inputs['fire'] && this.p.final == 0) {
                       Q.audio.play("boss_speak.ogg");
                       tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
@@ -97,30 +97,37 @@ Quintus.AKSpritesPlayer = function(Q) {
                       alexHand = this.stage.insert(new Q.AlexFinalGame());
                     }
                 } else {
-                    //GOLPEAR
-                    if (Q.inputs['fire'] && this.p.punching == 0) {
-                        fist = Q.stage().insert(new Q.AlexFist());
-                        this.p.punching = 1;
-                        Q.audio.play("punch.ogg");
-                        this.play("punch");
-                        this.p.punching = 2;
-                    } else {
-                        if (!Q.inputs['fire'] && this.p.punching == 2) {
-                            this.p.punching = 0;
-                            fist.destroy();
-                        }
-                        //MOVIMIENTOS
-                        if (Q.inputs['up'] && !this.p.jumping) {
-                            Q.audio.play("jump.ogg");
-                        } else if (Q.inputs['down']) this.play("crouch_" + this.p.direction);
-                        else if (this.p.jumping && this.p.landed < 0) {
-                            this.play("jump_" + this.p.direction);
-                        } else if (this.p.vx < 0 || this.p.vx > 0) {
-                            this.play("run_" + this.p.direction);
+                    if (!Q.inputs['down']) {//GOLPEAR
+                        this.add('platformerControls');
+                        if (Q.inputs['fire'] && this.p.punching == 0) {
+                            fist = Q.stage().insert(new Q.AlexFist());
+                            this.p.punching = 1;
+                            Q.audio.play("punch.ogg");
+                            this.play("punch");
+                            this.p.punching = 2;
                         } else {
-                            if (this.p.vy != 0) this.play("jump_" + this.p.direction);
-                            if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
+                            if (!Q.inputs['fire'] && this.p.punching == 2) {
+                                this.p.punching = 0;
+                                fist.destroy();
+                            }
+                            //MOVIMIENTOS
+                            if (Q.inputs['up'] && !this.p.jumping) {
+                                Q.audio.play("jump.ogg");
+                            }
+                            else if (this.p.jumping && this.p.landed < 0) {
+                                this.play("jump_" + this.p.direction);
+                            } else if (this.p.vx < 0 || this.p.vx > 0) {
+                                this.play("run_" + this.p.direction);
+                            } else {
+                                if (this.p.vy != 0) this.play("jump_" + this.p.direction);
+                                if (this.p.vy == 0 && this.p.vx == 0 && this.p.punching == 0) this.play("stand_" + this.p.direction);
+                            }
                         }
+                    }
+                    else if (Q.inputs['down'])  {
+                        this.del('platformerControls');
+                        this.p.vx=0;
+                        this.play("crouch_" + this.p.direction);
                     }
                 }
             } else {
@@ -265,7 +272,7 @@ Quintus.AKSpritesPlayer = function(Q) {
             enemyHand = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
           }
 
-          else { //ELECCION FINAL GAME
+          else {
             alex.p.punching = 2;
             if(Q.inputs['fire'] && this.p.frame == 0){
               this.p.frame = 1;
