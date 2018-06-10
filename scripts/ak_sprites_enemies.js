@@ -303,12 +303,18 @@ Quintus.AKSpritesEnemies = function(Q) {
             }
 
             if(this.p.gana == true){
+              console.log("dentro");
+              /*Q.clearStages();
+              Q.stageScene("level1");*/
               alexHand.destroy();
-              bossEnemy.destroy();
+              bossEnemy.p.frame = -1;
               this.destroy();
-              alexF = this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));
               alex.destroy();
-              rice = this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y }));
+
+              setTimeout(function(){ this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y })); this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y })); }, 3000);
+
+              /*Q.clearStages();
+              Q.stageScene("creditos");*/
             }
           }
         }

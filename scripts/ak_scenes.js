@@ -302,7 +302,8 @@ Quintus.AKScenes = function(Q) {
             size: 12,
             color: '#fff',
             family: 'Alex Kidd in Miracle World',
-            label: ("SCORE: " + stage.options.score)
+            //label: ("SCORE: " + stage.options.score)
+            label: ("SCORE: " + Q.state.p.coins.toString()),
         }));
 
         container.fit(Q.height);
