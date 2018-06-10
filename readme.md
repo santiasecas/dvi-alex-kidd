@@ -17,6 +17,7 @@ Se va a proceder a explicar las mecánicas desarrolladas para el videojuego.
 Las mecánicas desarrolladas están basadas principalmente en el personaje principal, Alex.
 
 En cuanto a las cajas, Alex Kidd podrá interactuar con:
+
 -**Caja Estrella**: Se podrá romper con el puño y contendrá bolsas de dinero.
 
 -**Caja Interrogación**: Se podrá romper y contendrá un anillo, una vida, o un fantasma, de manera aleatoria.
