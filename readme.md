@@ -58,9 +58,10 @@ Se ha definido en "ak_sprites_enemies.js" un nuevo componente: "defaultEnemy", p
 ### Equipo de trabajo y reparto de tareas
 El equipo de trabajo se ha compuesto por:
 
-- Santiago Baidez Ayuste:
+- Santiago Baidez Ayuste
 - Jorge Díez Sánchez-Caballero 
 - Daniel García Baameiro 
+- Eduardo Gonzalo Montero
 
 El reparto de tareas ha sido el siguiente:
 - Santiago Baidez Ayuste:
