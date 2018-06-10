@@ -302,7 +302,7 @@ Quintus.AKSpritesEnemies = function(Q) {
               Q.stageScene("endGame");
             }
 
-            if(gana == true){
+            if(this.p.gana == true){
               alexHand.destroy();
               bossEnemy.destroy();
               this.destroy();
