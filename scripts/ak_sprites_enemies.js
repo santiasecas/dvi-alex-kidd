@@ -248,7 +248,7 @@ Quintus.AKSpritesEnemies = function(Q) {
             this._super(p, {
                 sheet: 'gooseka',
                 sprite: 'BossAnimation',
-                scale: 0.9,
+                scale: 1.2,
                 muerto: false,
                 llamado: false
             });
@@ -287,9 +287,13 @@ Quintus.AKSpritesEnemies = function(Q) {
             console.log("Enemigo usa: " + this.p.frame);
             if(alexHand.p.frame == this.p.frame){
               console.log("empata");
-              alexHand.destroy();
               this.destroy();
+              // De momento al empatar se pierde
+              Q.clearStages();
+              Q.stageScene("endGame");
+
               //alexHand = this.stage.insert(new Q.AlexFinalGame());
+              //alexHand.destroy();
             }else if(alexHand.p.frame == 0 && this.p.frame == 1){
               console.log("gana");
               alex.p.boss = false;
@@ -310,18 +314,18 @@ Quintus.AKSpritesEnemies = function(Q) {
             }
 
             if(this.p.gana == true){
-              console.log("dentro");
+              this.destroy();
+              setTimeout( function(){ Q.clearStages(); Q.stageScene("creditos"); }, 3000);
+
               /* PENDIENTE: Ganar al tocar el arroz
+              //alexHand.destroy();
               Q.clearStages();
               Q.stageScene("level1");
               alexHand.destroy();
               alex.p.fin = true;
               bossEnemy.destroy();
-              //this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));
-              this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y }));
-              //setTimeout( function(){ Q.clearStages(); Q.stageScene("creditos"); }, 3000);*/
-              Q.clearStages();
-              Q.stageScene("creditos");
+              //this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));*/
+              //this.stage.insert(new Q.Rice({ x: bossEnemy.p.x - 50, y: bossEnemy.p.y }));
             }
           }
         }

@@ -78,7 +78,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                     this.p.sensor = true;
                     this.play("stand_" + 'right');
                     this.p.x = 160;
-                    bossEnemy = this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                    bossEnemy = this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y - 8 }));
                     //console.log("Altura enemigo: " + this.p.y);
                     if (!Q.inputs['fire'] && this.p.final == 0) {
                       Q.audio.play("boss_speak.ogg");
