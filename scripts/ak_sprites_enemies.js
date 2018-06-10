@@ -275,6 +275,15 @@ Quintus.AKSpritesEnemies = function(Q) {
           }
           this.p.count += dt;
           if(this.p.count > this.p.duration){
+            console.log("Alex usa: " + glob.p.frame);
+            console.log("Enemigo usa: " + this.p.frame);
+            if(glob.p.frame == this.p.frame){
+              console.log("empata");
+            }else if((glob.p.frame % 2) < (this.p.frame % 2) + 1){
+              console.log("gana");
+            }else{
+              console.log("pierde");
+            }
             Q.clearStages();
             Q.stageScene("creditos");
           }

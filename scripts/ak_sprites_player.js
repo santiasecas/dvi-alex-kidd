@@ -260,7 +260,7 @@ Quintus.AKSpritesPlayer = function(Q) {
 
           this.p.count += dt;
           if (this.p.count > this.p.duration) {
-            this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
+            glob = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
           }
 
           else {
