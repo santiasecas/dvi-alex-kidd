@@ -36,7 +36,8 @@ Quintus.AKSpritesPlayer = function(Q) {
                     if (Q.stages[0].lists["AlexFist"] !== undefined) {
                         Q.stages[0].lists["AlexFist"][0].destroy();
                     }
-                } else if (collision.obj.isA("Rice")) {
+                //} else if (collision.obj.isA("Rice")) {
+                } else if (this.p.y == 3434.4) {
                     this.p.boss = true;
                 }
             });
@@ -77,7 +78,8 @@ Quintus.AKSpritesPlayer = function(Q) {
                     this.p.sensor = true;
                     this.play("stand_" + 'right');
                     this.p.x = 160;
-                    this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                    bossEnemy = this.stage.insert(new Q.Boss({ x: this.p.x + 200, y: this.p.y }));
+                    //console.log("Altura enemigo: " + this.p.y);
                     if (!Q.inputs['fire'] && this.p.final == 0) {
                       Q.audio.play("boss_speak.ogg");
                       tfinal = this.stage.insert(new Q.TitleFinalGame({ x: 250, y: this.p.y - 200, frame: 0 }));
@@ -92,7 +94,7 @@ Quintus.AKSpritesPlayer = function(Q) {
                     } else if (Q.inputs['fire'] && this.p.final == 2) {
                       tfinal.destroy();
                       this.p.final = 3;
-                      glob = this.stage.insert(new Q.AlexFinalGame());
+                      alexHand = this.stage.insert(new Q.AlexFinalGame());
                     }
                 } else {
                     //GOLPEAR
@@ -260,21 +262,21 @@ Quintus.AKSpritesPlayer = function(Q) {
 
           this.p.count += dt;
           if (this.p.count > this.p.duration) {
-            glob = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
+            enemyHand = this.stage.insert(new Q.BossFinalGame({ frame: this.p.enemyHand }));
           }
 
           else {
+            alex.p.punching = 2;
             if(Q.inputs['fire'] && this.p.frame == 0){
               this.p.frame = 1;
-              sleep(1000);
             } else if (Q.inputs['fire'] && this.p.frame == 1){
               this.p.frame = 2;
-              sleep(1000);
             } else if(Q.inputs['fire'] && this.p.frame == 2){
               this.p.frame = 0;
             }
 
             this.p.enemyHand = Math.floor((Math.random() * 3));
+            alex.p.boss = false;
           }
         }
     });

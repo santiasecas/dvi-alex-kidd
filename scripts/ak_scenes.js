@@ -171,7 +171,7 @@ Quintus.AKScenes = function(Q) {
         for (r in rocks) {
             stage.insert(new Q.Rock(blocksToMap(rocks[r])));
         }
-        stage.insert(new Q.Rice(blocksToMap([13, 107])));
+        //stage.insert(new Q.Rice(blocksToMap([13, 107])));
         stage.add("viewport").follow(alex, { x: false, y: true });
         stage.centerOn(256, 0);
     });

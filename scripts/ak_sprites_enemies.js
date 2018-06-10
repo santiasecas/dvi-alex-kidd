@@ -265,6 +265,7 @@ Quintus.AKSpritesEnemies = function(Q) {
                 duration: 3,
                 count: 0,
                 end: 5,
+                gana: false,
             });
             this.add('2d, platformerControls, animation, tween');
         },
@@ -275,20 +276,41 @@ Quintus.AKSpritesEnemies = function(Q) {
           }
           this.p.count += dt;
           if(this.p.count > this.p.duration){
-            console.log("Alex usa: " + glob.p.frame);
+            console.log("Alex usa: " + alexHand.p.frame);
             console.log("Enemigo usa: " + this.p.frame);
-            if(glob.p.frame == this.p.frame){
+            if(alexHand.p.frame == this.p.frame){
               console.log("empata");
-            }else if((glob.p.frame % 2) < (this.p.frame % 2) + 1){
+              alexHand.destroy();
+              this.destroy();
+              alexHand = this.stage.insert(new Q.AlexFinalGame());
+            }else if(alexHand.p.frame == 0 && this.p.frame == 1){
               console.log("gana");
+              this.p.gana = true;
+            }else if(alexHand.p.frame == 2 && this.p.frame == 0){
+              console.log("gana");
+              this.p.gana = true;
+            }else if(alexHand.p.frame == 1 && this.p.frame == 2){
+              console.log("gana");
+              this.p.gana = true;
             }else{
+              sleep(2000);
               console.log("pierde");
+              Q.clearStages();
+              Q.stageScene("endGame");
             }
-            Q.clearStages();
-            Q.stageScene("creditos");
+
+            if(gana = true){
+              alexHand.destroy();
+              bossEnemy.destroy();
+              this.destroy();
+              alex.destroy();
+              alexF = this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));
+              rice = this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y }));
+            }
           }
         }
     });
+
 
     /**===========================================================================================
      *

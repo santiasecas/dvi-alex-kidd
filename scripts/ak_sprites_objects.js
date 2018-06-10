@@ -248,8 +248,8 @@ Quintus.AKSpritesObjects = function(Q) {
                 if (collision.obj.isA("Alex")) {
                     this.del('platformerControls');
                     this.destroy();
-                    /*Q.clearStages();
-                    Q.stageScene("creditos");*/
+                    Q.clearStages();
+                    Q.stageScene("creditos");
                 }
             });
         }
