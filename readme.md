@@ -7,7 +7,7 @@ El objetivo del juego original es superar niveles derrotando a cada uno de los m
 
 Para ello, nos hemos basado en el primer nivel del juego original y en la parte donde vendría una zona de agua, se ha sustituido por una pelea a "piedra, papel o tijera" contra el primer "boss" del juego: "Gooseka".
 
-Por lo tanto, el objetivo del juego es llegar con vida al final, donde pelearemos con el "boss" a "piedra, papel o tijera" y tendremos que vencerle. Si nos gana, nos quitará una vida.
+Por lo tanto, el objetivo del juego es llegar con vida al final y, una vez obtenido el dulce de arroz, pelearemos con el "boss" a "piedra, papel o tijera" y tendremos que vencerle. Si nos gana, nos quitará una vida.
 Si Alex se queda sin vidas restantes, perderá la partida. Si vence al "boss" a "piedra, papel o tijera", ganará la partida.
 Se pueden conseguir vidas extra de manera aleatoria en cajas interrogante, aunque a veces salen fantasmas de las mismas.
 
