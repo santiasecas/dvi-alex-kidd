@@ -1,5 +1,10 @@
 # Alex Kidd in Miracle World
-##Un proyecto usando Quintus
+## Un proyecto usando Quintus
+
+<p align="center">
+  <img src="https://lh3.googleusercontent.com/--S0AmH-1f40/Wu85mCH28DI/AAAAAAAAABU/wPwxcSkoyCEhgAtdmSlTz1cg9pfyq7dvgCL0BGAYYCw/h600/2018-05-06.pn" width="450">
+</p>
+
 ### Diseño del juego
 **1. Objetivo del juego: cómo se gana, cómo se pierde.**
 
