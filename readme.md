@@ -1,10 +1,5 @@
 # Alex Kidd in Miracle World
-## Un proyecto usando Quintus
-
-<p align="center">
-  <img src="https://lh3.googleusercontent.com/--S0AmH-1f40/Wu85mCH28DI/AAAAAAAAABU/wPwxcSkoyCEhgAtdmSlTz1cg9pfyq7dvgCL0BGAYYCw/h600/2018-05-06.pn" width="450">
-</p>
-
+##Un proyecto usando Quintus
 ### Diseño del juego
 **1. Objetivo del juego: cómo se gana, cómo se pierde.**
 
@@ -20,6 +15,14 @@ Se pueden conseguir vidas extra de manera aleatoria en cajas interrogante, aunqu
 
 Se va a proceder a explicar las mecánicas desarrolladas para el videojuego.
 Las mecánicas desarrolladas están basadas principalmente en el personaje principal, Alex.
+
+En cuanto a las cajas, Alex Kidd podrá interactuar con:
+-Caja Estrella: Se podrá romper con el puño y contendrá bolsas de dinero
+-Caja Interrogación: Se podrá romper y contendrá un anillo, una vida, o un fantasma, de manera aleatoria.
+-Caja Calavera Amarilla: Se podrá romper y en ese caso Alex Kidd quedará paralizado durante 1 segundo.
+-Caja calavera morada: Si alex Kidd la pisa aparecerá un fantasma que atacará a Alex Kidd.
+
+Las mecánicas desarrolladas están basadas principalmente en el personaje principal, Alex. 
 
 Este personaje puede correr a izquierda o derecha, saltar y agacharse.
 Además, puede golpear con su puño para eliminar a enemigos.
@@ -51,12 +54,19 @@ Se ha definido en "ak_sprites_enemies.js" un nuevo componente: "defaultEnemy", p
 ### Equipo de trabajo y reparto de tareas
 El equipo de trabajo se ha compuesto por:
 
-- Santiago Baidez Ayuste
+- Santiago Baidez Ayuste:
 - Jorge Díez Sánchez-Caballero 
 - Daniel García Baameiro 
-- Eduardo Gonzalo Montero
 
 El reparto de tareas ha sido el siguiente:
+- Santiago Baidez Ayuste:
+  Diseño gráfico y realización de los sprites, diseño del menú inicial, y programación del nivel y alex Kidd.
+- Jorge Díez Sánchez-Caballero 
+  Programación de enemigos y diferentes elementos como las cajas y items del juego,, así como correcciones y ajustes.
+- Daniel García Baameiro 
+  Programación de la pelea del jefe final Gooseka y los diferentes finales posibles del nivel.
+- Eduardo Gonzalo Montero
+  Programación de enemigos y diferentes elementos como las cajas y items del juego, así como correcciones y ajustes.
 
 ### Fuentes y referencias
 Para la realización de este videojuego se han utilizado diferentes recursos como imágenes y sonidos.
