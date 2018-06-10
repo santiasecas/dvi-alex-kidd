@@ -30,7 +30,6 @@ Las mecánicas desarrolladas están basadas principalmente en el personaje princ
 
 Este personaje puede correr a izquierda o derecha, saltar y agacharse.
 Además, puede golpear con su puño para eliminar a enemigos.
-El puño se compone de un sprite adicional y no 
 
 **3. Personajes**
 
