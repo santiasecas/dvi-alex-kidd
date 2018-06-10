@@ -255,6 +255,12 @@ Quintus.AKSpritesEnemies = function(Q) {
         }
     });
 
+    /**===========================================================================================
+     *
+     *                                 BOSS ELECTION FINAL GAME
+     *
+     ===========================================================================================*/
+
     Q.Sprite.extend("BossFinalGame", {
         init: function(p) {
             this._super(p, {
@@ -276,13 +282,14 @@ Quintus.AKSpritesEnemies = function(Q) {
           }
           this.p.count += dt;
           if(this.p.count > this.p.duration){
+            // JUEGO PIEDRA, PAPEL o TIJERAS
             console.log("Alex usa: " + alexHand.p.frame);
             console.log("Enemigo usa: " + this.p.frame);
             if(alexHand.p.frame == this.p.frame){
               console.log("empata");
               alexHand.destroy();
               this.destroy();
-              alexHand = this.stage.insert(new Q.AlexFinalGame());
+              //alexHand = this.stage.insert(new Q.AlexFinalGame());
             }else if(alexHand.p.frame == 0 && this.p.frame == 1){
               console.log("gana");
               alex.p.boss = false;
@@ -304,17 +311,17 @@ Quintus.AKSpritesEnemies = function(Q) {
 
             if(this.p.gana == true){
               console.log("dentro");
-              /*Q.clearStages();
-              Q.stageScene("level1");*/
+              /* PENDIENTE: Ganar al tocar el arroz
+              Q.clearStages();
+              Q.stageScene("level1");
               alexHand.destroy();
-              bossEnemy.p.frame = -1;
-              this.destroy();
-              alex.destroy();
-
-              setTimeout(function(){ this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y })); this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y })); }, 3000);
-
-              /*Q.clearStages();
-              Q.stageScene("creditos");*/
+              alex.p.fin = true;
+              bossEnemy.destroy();
+              //this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));
+              this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y }));
+              //setTimeout( function(){ Q.clearStages(); Q.stageScene("creditos"); }, 3000);*/
+              Q.clearStages();
+              Q.stageScene("creditos");
             }
           }
         }
