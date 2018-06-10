@@ -285,12 +285,15 @@ Quintus.AKSpritesEnemies = function(Q) {
               alexHand = this.stage.insert(new Q.AlexFinalGame());
             }else if(alexHand.p.frame == 0 && this.p.frame == 1){
               console.log("gana");
+              alex.p.boss = false;
               this.p.gana = true;
             }else if(alexHand.p.frame == 2 && this.p.frame == 0){
               console.log("gana");
+              alex.p.boss = false;
               this.p.gana = true;
             }else if(alexHand.p.frame == 1 && this.p.frame == 2){
               console.log("gana");
+              alex.p.boss = false;
               this.p.gana = true;
             }else{
               sleep(2000);
@@ -299,12 +302,12 @@ Quintus.AKSpritesEnemies = function(Q) {
               Q.stageScene("endGame");
             }
 
-            if(gana = true){
+            if(gana == true){
               alexHand.destroy();
               bossEnemy.destroy();
               this.destroy();
-              alex.destroy();
               alexF = this.stage.insert(new Q.Alex({ x: alex.p.x, y: alex.p.y }));
+              alex.destroy();
               rice = this.stage.insert(new Q.Rice({ x: bossEnemy.p.x, y: bossEnemy.p.y }));
             }
           }
