@@ -1,6 +1,9 @@
-# Alex Kidd in Miracle World
-##Un proyecto usando Quintus
-### Diseño del juego
+# Alex Kidd in Miracle World#
+
+## Una demo de videojuego usando el motor Quintus ##
+
+### Diseño del juego ###
+
 **1. Objetivo del juego: cómo se gana, cómo se pierde.**
 
 El objetivo del juego original es superar niveles derrotando a cada uno de los monstruos finales (que llamaremos "bosses") a los que hay que derrotar en una batalla a "piedra, papel o tijera". En el juego desarrollado, se ha querido plasmar esa esencia, desarrollando un único nivel pero mostrando la misma dinámica, llegar al final del nivel y luchar contra uno de los "bosses".
@@ -63,14 +66,15 @@ El equipo de trabajo se ha compuesto por:
 - Eduardo Gonzalo Montero
 
 El reparto de tareas ha sido el siguiente:
+
 - Santiago Baidez Ayuste:
   Diseño gráfico y realización de los sprites, diseño del menú inicial, y programación del nivel y alex Kidd.
 - Jorge Díez Sánchez-Caballero 
-  Programación de enemigos y diferentes elementos como las cajas y items del juego,, así como correcciones y ajustes.
+  Programación de enemigos y diferentes elementos como las cajas e items del juego, así como correcciones y ajustes.
 - Daniel García Baameiro 
   Programación de la pelea del jefe final Gooseka y los diferentes finales posibles del nivel.
 - Eduardo Gonzalo Montero
-  Programación de enemigos y diferentes elementos como las cajas y items del juego, así como correcciones y ajustes.
+  Programación de enemigos y diferentes elementos como las cajas e items del juego, así como correcciones y ajustes.
 
 ### Fuentes y referencias
 Para la realización de este videojuego se han utilizado diferentes recursos como imágenes y sonidos.
@@ -88,4 +92,3 @@ https://www.spriters-resource.com
 
 - Toda la música descargada desde:
 https://downloads.khinsider.com/game-soundtracks/album/alex-kidd
-
