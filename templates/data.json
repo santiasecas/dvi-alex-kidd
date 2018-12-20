@@ -5,5 +5,12 @@
     "y": -70,
     "width": 294,
     "height": 140
+   },
+  "VLCRaptors": {
+    "name": "vlcraptors.png",
+    "x": 31960,
+    "y": 63960,
+    "width": 80,
+    "height": 80
    }
 }
